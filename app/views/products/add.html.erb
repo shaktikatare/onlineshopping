@@ -1,0 +1,21 @@
+<h2>wellcome to add new product</h2>
+<div style="width:500px; margin:0 auto;">
+  <h3>Add New Product</h3>
+  <%= form_for(@product) do |f|%>
+    
+    <lable>Select category</lable>
+    <%= select("post", "category_id", Category.all.collect {|c| [ c.name, c.id ] }, {include_blank: 'None'})%>
+    </br>
+    <lable>Product Name</lable>
+    <%= f.text_field :name%> 
+    </br>
+    <lable>Product Price</lable>
+    <%= f.text_field :price%>
+    </br>
+    <lable>Product Description</lable>
+    <%= f.text_field :description%>
+    </br>
+    <%= f.submit "Add Products"%>
+  <%end%>  
+  <%= link_to "back", welcome_users_path%> 
+</div>

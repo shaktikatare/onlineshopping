@@ -1,0 +1,11 @@
+<h2>wellcome to add new category</h2>
+<div style="width:500px; margin:0 auto;">
+  <h3>Add New Category</h3>
+  <%= form_for(@category) do |f|%>
+    <lable>Category Name</lable>
+    <%= f.text_field :name%>
+    </br>
+    <%= f.submit "Add Category"%>
+  <%end%>  
+  <%= link_to "back", welcome_users_path%> 
+</div>

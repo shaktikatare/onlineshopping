@@ -1,0 +1,11 @@
+<h1 style="width:500px; margin:0 auto;">Wellcome to online shopping</h1>
+</br>
+<div align="right">
+<% if current_user.present? %>
+  <%= link_to "signout",destroy_user_session_path, :method => :delete%> 
+<%else%>
+  <%= link_to "signin", new_user_session_path%>
+  </br>
+  <%= link_to "signup",new_user_registration_path%>     
+<%end%>
+</div>
