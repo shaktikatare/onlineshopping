@@ -52,18 +52,19 @@ Mydemo1::Application.routes.draw do
   # just remember to delete public/index.html.
    resources :products do
      collection do
-       get:add
+       get:product_details
+       get:addtocart
+       get:displaycart
      end
    end    
-   resources :categories do
-     collection do
-       get:add
-     end
-   end    
+         
+   resources :categories
+       
    
    resources :users do
      collection do
       get:welcome
+      get:home
      end 
    end  
     root to: "users#home"

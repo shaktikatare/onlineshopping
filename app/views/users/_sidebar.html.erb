@@ -1,0 +1,14 @@
+<div style="background-color:#F0F0D4;margin-left:20px;width:200px;float:left">
+  <div style="background-color:#F0F0D4;margin-left:20px;width:200px;padding:10px">
+    <h5>Categories</h5>
+    <% if current_user.present? && current_user.is_admin %>
+      <li><%= link_to   "Add New Category", "/categories/new"  %></li>
+      <li><%= link_to "Add New Product","/products/new" %></li>
+      <li><%= link_to "Show category","/categories/1" %></li>
+      <li><%= link_to "Show Products","/products/1" %></li>
+    <%else @category.each do |c|%>
+      <li><%= link_to c.name, product_path(c), :id=>"#{c.id}" %></li>
+          <%end%>
+    <% end %>
+    </div>          
+  </div>

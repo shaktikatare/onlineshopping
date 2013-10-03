@@ -1,5 +1,7 @@
+<%= render partial:"users/sidebar" %>
+  
 <h2 style="width:500px; margin:0 auto;">Sign in</h2>
-<div style="width:500px; margin:0 auto;">
+<div class="alignment">
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <div><%= f.label :email %><br />
   <%= f.email_field :email, :autofocus => true %></div>

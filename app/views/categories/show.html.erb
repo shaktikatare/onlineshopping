@@ -1,0 +1,12 @@
+<%= render partial:"users/sidebar" %>
+  
+<div class="alignment">
+  <% @categories.each do |c|%>
+  <div>
+     <lable><%=c.name%></lable>     
+    <%= link_to "Delete", category_path(c), method: :delete, class: "btn btn-danger"%>
+    <%= link_to "edit",  edit_category_path(c),method: :get, class: "btn btn-default"%>
+  </div></br>  
+  <%end%>
+</div>
+

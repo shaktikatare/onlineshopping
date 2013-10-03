@@ -1,7 +1,11 @@
 class CategoriesController < ApplicationController
-  
-  def add
+  before_filter :authenticate_user!
+  def new
     @category=Category.new
+  end
+  
+  def show
+    @categories = Category.all
   end
   
   def create
@@ -11,4 +15,27 @@ class CategoriesController < ApplicationController
     end
   end
   
+  def destroy
+    @category = Category.find(params[:id])
+    if @category.destroy
+      flash[:notice]="category remove"    
+      redirect_to welcome_users_path
+    else
+      flash[:notice]="category is not remove"  
+    end
+  end
+  
+  def edit
+    @category=Category.find(params[:id])  
+  end
+  
+  def update
+    @category = Category.find(params[:id])
+    if @category.update_attributes(params[:category])
+      flash[:notice]="category updated"
+      redirect_to welcome_users_path
+    else
+      flash[:notice]="category is not updated"  
+    end
+  end
 end

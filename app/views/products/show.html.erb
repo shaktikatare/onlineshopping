@@ -1,0 +1,54 @@
+<%- model_class = Product -%>
+
+<%=link_to "show cart","/products/displaycart", class:"btn btn-default"%>
+<% if current_user.is_admin %>
+  <%= render partial:"users/sidebar" %>
+  <div class="alignment">
+    <% @products.each do |p|%>
+      <div>
+        <lable><%= p.name%></lable>
+        <%= link_to "Delete", product_path(p), method: :delete, class: "btn btn-danger"%>
+        <%= link_to "edit", edit_product_path(p),method: :get, class: "btn btn-default"%>
+      </div></br>  
+    <%end%>
+  </div>
+<%else%>
+  <ul class="products">
+       <% @products.each do |p|%>
+         <% p.pictures.each do |i|%>
+         <li class="thumbnail">
+           <a href=<%=product_details_products_path%>?id=<%=p.id%>> 
+             <%= image_tag(i.image,:size => "80x60")%>
+             <h5><%=p.name%></h5>
+             <p>Price:<%=p.price%></p>
+          </a>
+          <div id='<%=p.id%>'></div>
+          <%=link_to "Buy",product_details_products_path(:id=>p.id),class: "btn btn-default"%>
+          <button class="addcart" data-id='<%=p.id%>'>Add to cart</button>
+         </li>
+         <% end %>        
+       <% end %> 
+    </ul>   
+<div class="form-actions">
+    <%= link_to "back",root_path%>
+  </div>
+  
+  
+<%end%>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+  $(document).ready(function(){
+    $(".addcart").click(function(){
+      id = $(this).data('id');
+      $.get('/products/addtocart?id='+id);
+    });
+  });
+</script>
+<style>
+  ul.products li {
+      width: 200px;
+      display: inline-block;
+}
+</style>

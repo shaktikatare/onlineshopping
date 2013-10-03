@@ -1,0 +1,10 @@
+<%= render partial:"users/sidebar" %>
+<div class="alignment">
+<%= form_for(@category) do |f|%>
+  <lable>Category Name</lable>
+  <%= f.text_field :name%>
+  </br>
+  <%= f.submit "Add Category"%>
+  <%end%>
+  <%= link_to "back", welcome_users_path%> 
+</div>

@@ -5,9 +5,12 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+#bootstrap
+gem 'bootstrap-sass', '~> 2.3.2.1'
+
 gem 'mysql2'
 gem "devise"
-
+gem 'carrierwave'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -19,7 +22,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
+gem "nested_form"
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password

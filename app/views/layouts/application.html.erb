@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mydemo1</title>
+  <title>OnlineShopping</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <%= javascript_include_tag :defaults %>
 </head>
-<body style="background-color:#eeeeee">
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<style>
+  a{
+    margin-right:20px;
+    }    
+</style>
+<body>
+  <div style="background-color:#F0F0D4;margin:20px;height:50px;padding:10px">
+    <% if current_user.present?%>
+      <%= link_to "signout","/users/sign_out", :method => :delete%>
+      <%= link_to  "home" , current_user.is_admin ? "/users/welcome" : "/users/home" %>
+      <%= link_to "UserProfile",edit_user_registration_path%>
+    <%else%>
+      <%= link_to "signin","/users/sign_in"%>
+      <%= link_to "signup","/users/sign_up"%> 
+    <%end%>               
+   </div>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+<h3 style="width:800px; margin:0 auto;">welcome to online shopping</h3>
+
 <%= yield %>
 
 </body>
