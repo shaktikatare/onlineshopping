@@ -9,4 +9,5 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :phone, :password, :country, :state, :city, :address, :is_admin
   
   has_many :pictures, as: :imageable
+  has_one :cart
 end

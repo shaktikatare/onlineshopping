@@ -53,8 +53,9 @@ Mydemo1::Application.routes.draw do
    resources :products do
      collection do
        get:product_details
-       get:addtocart
-       get:displaycart
+       get:add_to_cart
+       get:display_cart
+       get:remove_from_cart
      end
    end    
          

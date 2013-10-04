@@ -41,20 +41,25 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
   
-  def addtocart
-    @addtocart=Addtocart.where(:user_id=>current_user.id, :product_id=>params[:id]).first
-    @pid=params[:id]
-    if @addtocart.present?
-      @message="already present to cart"
+  def add_to_cart
+    @cart = Cart.where(:user_id=>current_user.id, :product_id=>params[:id]).first
+    @pid = params[:id]
+    if @cart.present?
+      @message = "already present to cart"
     else 
-      @addtocart=Addtocart.new(:user_id=>current_user.id, :product_id=>params[:id])
-      @addtocart.save
-      @message="add to cart"
+      @cart = Cart.create(:user_id=>current_user.id, :product_id=>params[:id])
+      @message = "add to cart"
     end
+    
   end
   
-  def displaycart
-    @cart = Addtocart.where(:user_id => current_user.id)
+  def remove_from_cart
+    @cart=Cart.where(:user_id => current_user.id, :product_id=>params[:id]).first.destroy
+    #redirect_to display_cart_products_path
+  end
+  
+  def display_cart
+    @cart = Cart.where(:user_id => current_user.id)
     @products=[]
     @cart.each do |c|
       @products << Product.find(c.product_id)

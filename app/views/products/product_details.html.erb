@@ -6,3 +6,5 @@
   <lable>Price: <%= @product.price%></lable></br>
   <lable>Description: <%= @product.description%></lable></br>
 </div>
+<%= link_to "Proceed to payment","/", class:"btn btn-info"%>
+<%= link_to "Buy Product",display_cart_products_path,class:"btn btn-primary"%>

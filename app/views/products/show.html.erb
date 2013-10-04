@@ -1,6 +1,4 @@
 <%- model_class = Product -%>
-
-<%=link_to "show cart","/products/displaycart", class:"btn btn-default"%>
 <% if current_user.is_admin %>
   <%= render partial:"users/sidebar" %>
   <div class="alignment">
@@ -13,6 +11,7 @@
     <%end%>
   </div>
 <%else%>
+  <%=link_to "show cart","/products/display_cart", class:"btn btn-default"%>
   <ul class="products">
        <% @products.each do |p|%>
          <% p.pictures.each do |i|%>
@@ -23,7 +22,7 @@
              <p>Price:<%=p.price%></p>
           </a>
           <div id='<%=p.id%>'></div>
-          <%=link_to "Buy",product_details_products_path(:id=>p.id),class: "btn btn-default"%>
+          <%=link_to "Buy",product_details_products_path(:id=>p.id),class: "btn btn-primary"%>
           <button class="addcart" data-id='<%=p.id%>'>Add to cart</button>
          </li>
          <% end %>        
@@ -42,7 +41,7 @@
   $(document).ready(function(){
     $(".addcart").click(function(){
       id = $(this).data('id');
-      $.get('/products/addtocart?id='+id);
+      $.get('/products/add_to_cart?id='+id);
     });
   });
 </script>
