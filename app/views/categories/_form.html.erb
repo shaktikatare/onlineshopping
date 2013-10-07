@@ -1,10 +1,15 @@
 <%= render partial:"users/sidebar" %>
 <div class="alignment">
-<%= form_for(@category) do |f|%>
-  <lable>Category Name</lable>
-  <%= f.text_field :name%>
-  </br>
-  <%= f.submit "Add Category"%>
+  <%= form_for(@category) do |f|%>
+    <%= f.text_field :name, :placeholder => "Category Name"%>
+    </br>
+    <% if @category.id%>
+      <%= f.submit "Update Category", class:"btn btn-default"%>
+      <%= link_to "back", categories_path%>
+    <% else%>   
+      <%= f.submit "Add Category", class:"btn btn-default"%>
+      <%= link_to "back", welcome_users_path%>
+    <%end%>
   <%end%>
-  <%= link_to "back", welcome_users_path%> 
 </div>
+

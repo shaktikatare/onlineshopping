@@ -4,6 +4,9 @@ class CategoriesController < ApplicationController
     @category=Category.new
   end
   
+  def index
+    @categories = Category.all
+  end
   def show
     @categories = Category.all
   end
@@ -11,7 +14,11 @@ class CategoriesController < ApplicationController
   def create
     @category=Category.new(params[:category])
     if @category.save
+      flash[:notice]="category is created successfully"  
       redirect_to welcome_users_path
+    else
+      flash[:notice]="please enter category name"
+      redirect_to new_category_path  
     end
   end
   

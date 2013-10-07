@@ -9,6 +9,7 @@
     </tr>
   </thead>
   <tbody>
+    
     <% @products.each do |p| %>
       <tr id="product-<%=p.id%>">
         <td>
@@ -21,19 +22,15 @@
           <%= p.price%>
         </td>
         <td>
-          <select id="qty-<%=p.id%>" style="width:80px" onchange='maketotal("<%=p.id%>","<%=p.price%>")'>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
+          <input type="text" id="qty-<%=p.id%>" value=1 style="width:80px" onchange='maketotal("<%=p.id%>","<%=p.price%>")'>
         </td>
         <td>
-          <span>Rs. </span>
           <span id="subtotal-<%=p.id%>"><%=p.price%></span>
         </td>
         <td>
-          <button id="removeitem-<%=p.id%>" onclick="removeitem('<%=p.id%>')">Remove</button>
+          <button id="removeitem-<%=p.id%>" onclick="removeitem('<%=p.id%>')" class="btn btn-warning">Remove</button>
         </td>
+        
       </tr>
     <%end%>
   </tbody>
@@ -41,7 +38,7 @@
 <div id="div1"></div>
 
 <div style="background-color:#FFE0E0;height:100px;">
-  <div>Cart Summary(<%= @products.length%>Items(s))</div></br>
+  <div id="totalitem">Cart Summary(<%= @products.length%>Item(s))</div></br>
   
   <% @x=0; 
        @products.each do |p|
@@ -49,25 +46,37 @@
        end    
   %>
   
-  <div id="payable_amount" value=<%= @x%>>Payable amount: <%= @x%></div>
+  <div id="payable_amount">Payable amount: <%= @x%></div>
   <%= link_to "Proceed to payment","/", class:"btn btn-info"%>  
 </div>
 <%= link_to "Back",root_path%>
 <script>
 
 function removeitem(id){
-  $.get("/products/remove_from_cart?id="+id); 
+  $.get("/products/remove_from_cart?id="+id,function(){
+   $("#product-"+id).remove();
+   payable_amount();       
+  }); 
 }
 
 function maketotal(id,price){
-    $("#subtotal-"+id).text($("#qty-"+id).val()*price);
-    amt=0;
-    <% @products.each do |p|%>
-       amt= amt + parseInt($("#subtotal-"+<%=p.id%>).html());
-    <%end%>     
-    $("#payable_amount").text("Payable amount:"+amt); 
-   }
+  $("#subtotal-"+id).text($("#qty-"+id).val()*price);
+  payable_amount(); 
+ }
+ 
+function payable_amount(){
+  var rows = $("#table td:nth-child(5)");
+  amt=0;
+  for(var i=0; i< rows.length;i++)
+    {
+      amt= amt + parseInt(rows[i].textContent);
+    }
+  $("#payable_amount").text("Payable amount:"+amt); 
+} 
 </script>
+
+
+
 
 
 

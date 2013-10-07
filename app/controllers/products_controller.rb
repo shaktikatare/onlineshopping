@@ -5,12 +5,22 @@ class ProductsController < ApplicationController
   end
   
   def index
+    if current_user.is_admin
+      @products = Product.all
+    else
+      @category = Category.find(params[:id])
+      @products = @category.products
+    end
   end
   
   def create
     @product = Product.new(params[:product])
     if @product.save
+      flash[:notice]="product save"    
       redirect_to welcome_users_path
+    else
+      flash[:notice]="please fill form correctly"
+      redirect_to new_product_path
     end  
   end
   
@@ -20,6 +30,17 @@ class ProductsController < ApplicationController
     else
       @category = Category.find(params[:id])
       @products = @category.products
+    end
+  end
+  
+  def destroy
+    @product = Product.find(params[:id])
+    @cart=Cart.where(:product_id=>params[:id])
+    if @product.destroy and @cart.destroy_all
+      flash[:notice]="product remove"    
+      redirect_to welcome_users_path
+    else
+      flash[:notice]="product is not remove"  
     end
   end
   
@@ -55,6 +76,7 @@ class ProductsController < ApplicationController
   
   def remove_from_cart
     @cart=Cart.where(:user_id => current_user.id, :product_id=>params[:id]).first.destroy
+    @products=Product.find(params[:id])
     #redirect_to display_cart_products_path
   end
   

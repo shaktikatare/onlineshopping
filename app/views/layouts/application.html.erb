@@ -5,27 +5,38 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+<script>
+  $(document).ready(function(){
+    $("#notice").fadeOut(6000); 
+    });  
+</script>
 </head>
+
 <style>
   a{
     margin-right:20px;
     }    
 </style>
-<body>
-  <div style="background-color:#463265;height:30px;padding:20px">
-    <% if current_user.present?%>
-      <%= link_to "signout","/users/sign_out", :method => :delete%>
-      <%= link_to  "home" , current_user.is_admin ? "/users/welcome" : "/users/home" %>
-      <%= link_to "UserProfile",edit_user_registration_path%>
-      <div align="right"><%= link_to  "Welcome "+current_user.first_name,current_user.is_admin ? "/users/welcome" : "/users/home"%></div>
-    <%else%>
-      <%= link_to "signin","/users/sign_in"%>
-      <%= link_to "signup","/users/sign_up"%> 
-    <%end%>               
-   </div>
+<body style="background-color:#F5F5F5">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+      <% if current_user.present?%>
+        <li><%= link_to "signout","/users/sign_out", :method => :delete%></li>
+        <li><%= link_to  "home" , current_user.is_admin ? "/users/welcome" : "/users/home" %></li>
+        <li><%= link_to "UserProfile",edit_user_registration_path%></li>
+        <li><%= link_to "Welcome "+current_user.first_name, "#"%></li>
+      <%else%>
+        <li><%= link_to "signin","/users/sign_in"%></li>
+        <li><%= link_to "signup","/users/sign_up"%></li> 
+      <%end%>
+      </ul>               
+    </div>
+  </nav>
+  <p class="alert alert-success">
+    <lable id="notice"><%= notice %></lable>
+  </p>
 
-  <p class="alert alert-success"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
 
 
 <%= yield %>
