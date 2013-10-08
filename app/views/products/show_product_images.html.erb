@@ -1,0 +1,15 @@
+<%= render partial:"users/sidebar" %>
+<ul class="products">
+  <% @product.pictures.each do |i|%>
+    <div class="alignment">
+      <li class="thumbnail">
+        <a>
+          <%= image_tag(i.image,:size => "80x60")%>
+          <h5><%=@product.name%></h5>
+          <p>Price:<%=@product.price%></p>
+        </a>
+      </li>
+    </div>
+  <% end %> 
+</ul>
+<%= link_to "Back",products_path, class:"btn btn-default"%>   

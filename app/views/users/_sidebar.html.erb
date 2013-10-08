@@ -12,3 +12,19 @@
     <% end %>
     </div>          
   </div>
+
+<% if notice.present? %>
+  <p id="notice" class="alert alert-success" style="width:500px; margin:0 auto;padding:20px;">
+    <lable  ><%=notice%></lable>
+  </p>
+<%else if flash[:partial]%>
+  <p id="notice" class="alert alert-danger" style="width:500px; margin:0 auto;padding:20px;">
+    <lable  ><%= flash[:partial] %></lable>
+  </p>
+  <%end%>
+<%end%>
+<script>
+  $(document).ready(function(){
+    $("#notice").fadeOut(2000); 
+  });
+</script>

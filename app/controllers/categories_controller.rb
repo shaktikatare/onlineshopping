@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
     @categories = Category.all
   end
   def show
-    @categories = Category.all
+    
   end
   
   def create
@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
       flash[:notice]="category is created successfully"  
       redirect_to welcome_users_path
     else
-      flash[:notice]="please enter category name"
+      flash[:partial]="please enter category name"
       redirect_to new_category_path  
     end
   end
@@ -26,9 +26,9 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     if @category.destroy
       flash[:notice]="category remove"    
-      redirect_to welcome_users_path
+      redirect_to categories_path
     else
-      flash[:notice]="category is not remove"  
+      flash[:partial]="category is not remove"  
     end
   end
   
@@ -42,7 +42,7 @@ class CategoriesController < ApplicationController
       flash[:notice]="category updated"
       redirect_to welcome_users_path
     else
-      flash[:notice]="category is not updated"  
+      flash[:partial]="category is not updated"  
     end
   end
 end

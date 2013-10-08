@@ -5,11 +5,7 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-<script>
-  $(document).ready(function(){
-    $("#notice").fadeOut(6000); 
-    });  
-</script>
+
 </head>
 
 <style>
@@ -33,12 +29,6 @@
       </ul>               
     </div>
   </nav>
-  <p class="alert alert-success">
-    <lable id="notice"><%= notice %></lable>
-  </p>
-
-
-
 <%= yield %>
 
 </body>

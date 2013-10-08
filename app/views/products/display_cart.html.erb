@@ -39,40 +39,37 @@
 
 <div style="background-color:#FFE0E0;height:100px;">
   <div id="totalitem">Cart Summary(<%= @products.length%>Item(s))</div></br>
-  
-  <% @x=0; 
-       @products.each do |p|
-       @x=@x+p.price
-       end    
-  %>
-  
-  <div id="payable_amount">Payable amount: <%= @x%></div>
-  <%= link_to "Proceed to payment","/", class:"btn btn-info"%>  
+  <div id="payable_amount"></div>
+  <%= link_to "Proceed to payment",new_order_path, class:"btn btn-info"%>  
 </div>
-<%= link_to "Back",root_path%>
+<%= link_to "Back",product_path(:id=>@category_id)%>
 <script>
+  
+  $(document).ready(function(){
+    payable_amount();
+  });
+  
+  function removeitem(id){
+    $.get("/products/remove_from_cart?id="+id,function(){
+      $("#product-"+id).remove();
+      payable_amount();       
+    }); 
+  }
 
-function removeitem(id){
-  $.get("/products/remove_from_cart?id="+id,function(){
-   $("#product-"+id).remove();
-   payable_amount();       
-  }); 
-}
-
-function maketotal(id,price){
-  $("#subtotal-"+id).text($("#qty-"+id).val()*price);
-  payable_amount(); 
- }
- 
-function payable_amount(){
-  var rows = $("#table td:nth-child(5)");
-  amt=0;
-  for(var i=0; i< rows.length;i++)
-    {
-      amt= amt + parseInt(rows[i].textContent);
-    }
-  $("#payable_amount").text("Payable amount:"+amt); 
-} 
+  function maketotal(id,price){
+    $("#subtotal-"+id).text($("#qty-"+id).val()*price);
+    payable_amount(); 
+  }
+   
+  function payable_amount(){
+    var rows = $("#table td:nth-child(5)");
+    amt=0;
+    for(var i=0; i< rows.length;i++)
+      {
+        amt= amt + parseInt(rows[i].textContent);
+      }
+    $("#payable_amount").text("Payable amount:"+amt); 
+  }
 </script>
 
 

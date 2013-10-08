@@ -56,10 +56,12 @@ Mydemo1::Application.routes.draw do
        get:add_to_cart
        get:display_cart
        get:remove_from_cart
+       get:show_product_images
      end
    end    
          
    resources :categories
+   resources :orders
        
    
    resources :users do
