@@ -1,0 +1,35 @@
+<div class="alignment">
+  <% @order.each do |o|%>
+    <h5>Order ID:- <%= o.id%></h5>
+    <div>Recipient Name:- <%= o.full_name%></div>
+    <div>shipping Address:- <%= o.shipping_address%></div>
+    <div>Order Date:- <%= o.created_at%></div>
+    <div>Order Status:- <%= o.order_status==false ? "Not Delivered" : Delivered%></div>
+    <div>Ordered Products:-</div>
+    <table  class="table table-striped table-bordered table-condensed">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Unit Price</th>
+          <th>Quantity ordered</th>
+          <th>Sub Total</th>
+        </tr>
+      </thead>
+      <tbody>
+      <%payable_amount=0%>   
+        <% o.orderdetail.each do |d|%>
+          <% product = Product.find(d.product_id)%>  
+            <tr>
+              <td> <%=product.name%> </td>
+              <td> <%=product.price%> </td>
+              <td> <%=d.quantity%> </td>
+              <td> <%= product.price * d.quantity%> </td>
+              <% payable_amount = payable_amount + product.price * d.quantity %>
+            </tr>
+         <%end%>
+         <tr><td colspan="4">Total No. of Item => <%= o.orderdetail.length%></td></tr>
+         <tr><td colspan="4">Payable Amount => <%= payable_amount%></td></tr>      
+      </tbody>
+    </table>
+  <%end%>  
+</div>

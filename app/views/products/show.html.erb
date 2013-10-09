@@ -5,7 +5,7 @@
     <% @products.each do |p|%>
       <% p.pictures.each do |i|%>
         <li class="thumbnail">
-        <a href=<%=product_details_products_path%>?id=<%=p.id%>> 
+        <a href=<%=product_details_products_path(:id=>p.id, :cid=>@category.id)%>> 
           <%= image_tag(i.image,:size => "80x60")%>
           <h5><%=p.name%></h5>
           <p>Price:<%=p.price%></p>

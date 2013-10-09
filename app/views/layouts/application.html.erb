@@ -21,7 +21,7 @@
         <li><%= link_to "signout","/users/sign_out", :method => :delete%></li>
         <li><%= link_to  "home" , current_user.is_admin ? "/users/welcome" : "/users/home" %></li>
         <li><%= link_to "UserProfile",edit_user_registration_path%></li>
-        <li><%= link_to "Welcome "+current_user.first_name, "#"%></li>
+        <li><%= link_to "Welcome "+current_user.first_name, current_user.is_admin ? "#" : orders_path %></li>
       <%else%>
         <li><%= link_to "signin","/users/sign_in"%></li>
         <li><%= link_to "signup","/users/sign_up"%></li> 

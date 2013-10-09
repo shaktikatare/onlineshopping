@@ -6,6 +6,7 @@
       <li><%= link_to "Add New Product",new_product_path %></li>
       <li><%= link_to "Show category",categories_path %></li>
       <li><%= link_to "Show Products",products_path %></li>
+      <li><%= link_to "Show Orders",orders_path %></li>
     <%else @category.each do |c|%>
       <li><%= link_to c.name, product_path(c), :id=>"#{c.id}" %></li>
            <%end%>
