@@ -4,7 +4,20 @@
     <div>Recipient Name:- <%= o.full_name%></div>
     <div>shipping Address:- <%= o.shipping_address%></div>
     <div>Order Date:- <%= o.created_at%></div>
-    <div>Order Status:- <%= o.order_status==false ? "Not Delivered" : Delivered%></div>
+    <% if current_user.is_admin?%>
+      <div>Order Status Is:- <%= o.order_status==false ? "Not Delivered" : "Delivered"%></div>
+      <div style="width:150px;background-color:#F2FFD8">
+        <lable>Change status</lable></br>
+        <form action=<%= change_status_orders_path%> >
+          <input type="hidden" name="order_id" value=<%= o.id%>>
+          <input type="radio" name="status" value="true">Delivered</br>
+          <input type="radio" name="status" value="false">Not Delivered
+          <input type="submit" value="change status">
+        </form>
+      </div>
+    <%else%>
+      <div>Order Statu Is:- <%= o.order_status==false ? "Not Delivered" : Delivered%></div>      
+    <%end%>  
     <div>Ordered Products:-</div>
     <table  class="table table-striped table-bordered table-condensed">
       <thead>

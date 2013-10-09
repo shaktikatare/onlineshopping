@@ -62,7 +62,11 @@ Mydemo1::Application.routes.draw do
    end    
          
    resources :categories
-   resources :orders
+   resources :orders do
+     collection do
+       get:change_status
+     end
+   end  
        
    
    resources :users do
