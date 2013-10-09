@@ -74,12 +74,13 @@ class ProductsController < ApplicationController
   end
   
   def display_cart
-    @cart = Cart.where(:user_id => current_user.id)
+    @cart=current_user.cart
     @category_id=params[:id]
-    @products=[]
-    @cart.each do |c|
-      @products << Product.find(c.product_id)
-    end
+  end
+  
+  def update_qty
+    @cart=Cart.find(params[:id])
+    @cart.update_attributes(:qty=>params[:qty])
   end
   
   def show_product_images

@@ -10,25 +10,27 @@
   </thead>
   <tbody>
     
-    <% @products.each do |p| %>
-      <tr id="product-<%=p.id%>">
+    <% @cart.each do |c| %>
+      <% product=Product.find(c.product_id) %>
+      <tr id="product-<%=product.id%>">
         <td>
-          <%= p.name%>
+          <%= product.name%>
         </td>
         <td>
-          <%= p.description%>
+          <%= product.description%>
         </td>
         <td>
-          <%= p.price%>
+          <%= product.price%>
         </td>
         <td>
-          <input type="text" id="qty-<%=p.id%>" value=1 style="width:80px" onchange='maketotal("<%=p.id%>","<%=p.price%>")'>
+          <input type="text" id="qty-<%=product.id%>" value="<%=c.qty%>"style="width:80px" 
+          onchange='maketotal_update_qty("<%=product.id%>","<%=product.price%>","<%=c.id%>")'>
         </td>
         <td>
-          <span id="subtotal-<%=p.id%>"><%=p.price%></span>
+          <span id="subtotal-<%=product.id%>"><%= product.price * c.qty%></span>
         </td>
         <td>
-          <button id="removeitem-<%=p.id%>" onclick="removeitem('<%=p.id%>')" class="btn btn-warning">Remove</button>
+          <button id="removeitem-<%=product.id%>" onclick="removeitem('<%=product.id%>')" class="btn btn-warning">Remove</button>
         </td>
         
       </tr>
@@ -38,7 +40,7 @@
 <div id="div1"></div>
 
 <div style="background-color:#FFE0E0;height:100px;">
-  <div id="totalitem">Cart Summary(<%= @products.length%>Item(s))</div></br>
+  <div id="totalitem">Cart Summary(<%= @cart.length%>Item(s))</div></br>
   <div id="payable_amount"></div>
   <%= link_to "Proceed to payment",new_order_path, class:"btn btn-info"%>  
 </div>
@@ -56,9 +58,11 @@
     }); 
   }
 
-  function maketotal(id,price){
-    $("#subtotal-"+id).text($("#qty-"+id).val()*price);
-    payable_amount(); 
+  function maketotal_update_qty(pid,price,cid){
+    $("#subtotal-"+pid).text($("#qty-"+pid).val()*price);
+    payable_amount();
+    $.get("/products/update_qty?id="+cid+"&qty="+$("#qty-"+pid).val(),function(){
+    });
   }
    
   function payable_amount(){

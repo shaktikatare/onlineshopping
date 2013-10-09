@@ -57,6 +57,7 @@ Mydemo1::Application.routes.draw do
        get:display_cart
        get:remove_from_cart
        get:show_product_images
+       get:update_qty
      end
    end    
          
