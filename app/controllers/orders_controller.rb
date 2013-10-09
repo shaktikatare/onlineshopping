@@ -34,9 +34,9 @@ class OrdersController < ApplicationController
     if @order.update_attributes(:order_status => params[:status])
       flash[:notice]="Status is updated successfully"
       redirect_to orders_path
-    else
+    else  
       flash[:notice]="Status is not updated successfully"
-      redirect_to orders_path         
+      redirect_to orders_path
     end  
   end  
   

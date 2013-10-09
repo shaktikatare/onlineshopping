@@ -4,11 +4,11 @@
     <%= f.text_field :name, :placeholder => "Category Name"%>
     </br>
     <% if @category.id%>
-      <%= f.submit "Update Category", class:"btn btn-default"%>
+      <%= f.submit "Update Category", class:"btn btn-primary"%>
       <%= link_to "back", categories_path%>
     <% else%>   
-      <%= f.submit "Add Category", class:"btn btn-default"%>
-      <%= link_to "back", welcome_users_path%>
+      <%= f.submit "Add Category", class:"btn btn-primary"%>
+      <%= link_to "Cancel", welcome_users_path, class:"btn btn-default"%>
     <%end%>
   <%end%>
 </div>

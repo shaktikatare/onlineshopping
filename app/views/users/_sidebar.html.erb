@@ -1,18 +1,22 @@
-<div style="background-color:#EBFAFF;margin-left:20px;width:200px;float:left">
-  <div style="background-color:#EBFAFF;margin-left:20px;width:200px;padding:10px">
+<div style="margin-left:20px;width:300px;float:left">
+  <div style="background-color:#E9E9EB;margin-left:20px;width:300px;min-height:500px;padding:10px">
     
     <% if current_user.present? && current_user.is_admin %>
       <h5>Functions</h5>
-      <li><%= link_to   "Add New Category", new_category_path  %></li>
-      <li><%= link_to "Add New Product",new_product_path %></li>
-      <li><%= link_to "Show category",categories_path %></li>
-      <li><%= link_to "Show Products",products_path %></li>
-      <li><%= link_to "Show Orders",orders_path %></li>
+      <div class="list-group">
+        <li><%= link_to   "Add New Category", new_category_path, class:"list-group-item"  %></li>
+        <li><%= link_to "Add New Product",new_product_path, class:"list-group-item"  %></li>
+        <li><%= link_to "Show category",categories_path, class:"list-group-item"  %></li>
+        <li><%= link_to "Show Products",products_path, class:"list-group-item"  %></li>
+        <li><%= link_to "Show Orders",orders_path, class:"list-group-item"  %></li>
+      </div>
     <%else%> 
       <h5>Categories</h5>
-      <%@category.each do |c|%>
-        <li><%= link_to c.name, product_path(c), :id=>"#{c.id}" %></li>
-      <%end%>
+      <div class="list-group">
+        <%@category.each do |c|%>
+          <li><%= link_to c.name, product_path(c), :id=>"#{c.id}", class:"list-group-item"  %></li>
+        <%end%>
+      </div>
     <% end %>
     </div>          
   </div>
