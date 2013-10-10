@@ -1,15 +1,22 @@
 <%= render partial:"users/sidebar" %>
 <div class="alignment">
-  <%= form_for(@category) do |f|%>
-    <%= f.text_field :name, :placeholder => "Category Name"%>
-    </br>
-    <% if @category.id%>
-      <%= f.submit "Update Category", class:"btn btn-primary"%>
-      <%= link_to "back", categories_path%>
-    <% else%>   
-      <%= f.submit "Add Category", class:"btn btn-primary"%>
-      <%= link_to "Cancel", welcome_users_path, class:"btn btn-default"%>
-    <%end%>
-  <%end%>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h5>Add New Category</h5>
+    </div>
+    <div class="panel-body">
+      <%= form_for(@category) do |f|%>
+        <%= f.text_field :name, :placeholder => "Category Name"%>
+        </br></br>
+        <% if @category.id%>
+          <%= f.submit "Update Category", class:"btn btn-primary"%>
+          <%= link_to "back", categories_path%>
+        <% else%>   
+          <%= f.submit "Add Category", class:"btn btn-primary"%>
+          <%= link_to "Cancel", welcome_users_path, class:"btn btn-default"%>
+        <%end%>
+      <%end%>
+    </div>
+  </div>  
 </div>
 

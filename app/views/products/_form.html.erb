@@ -1,45 +1,52 @@
 <%= render partial:"users/sidebar" %>
 <div class="alignment">
-  <%= nested_form_for @product do |f| %>
-    <div class="control-group">
-      <lable>Select category</lable>
-      <div class="controls">
-      <%= f.select :category_ids, Category.all.collect {|c| [c.name, c.id]}, {}, :multiple => true %>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h5 class="panel-title">Add New Product</h5>
     </div>
-  </div>
-    
-    <div class="control-group">
-      <div class="controls">
-        <%= f.text_field :name, :class => 'text_field', :placeholder => "Name" %>
+    <div class="panel-body">
+      <%= nested_form_for @product do |f| %>
+        <div class="control-group">
+          <lable>Select category</lable>
+          <div class="controls">
+          <%= f.select :category_ids, Category.all.collect {|c| [c.name, c.id]}, {}, :multiple => true %>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.text_field :price, :class => 'number_field', :placeholder => "Price" %>
-      </div>
-    </div>
-    <div class="control-group">
-      <div class="controls">
-        <%= f.text_area :description, :class => 'text_area', :placeholder => "Description" %>
-      </div>
-    </div>
-    
-    <div>
-      <%= f.fields_for :pictures do |pic| %>
-        <%= pic.file_field :image %>
-        <%= pic.link_to_remove "Remove this image" %>
-      <% end %>
-      <p><%= f.link_to_add "Add a image", :pictures %></p>
-      </br>
-    </div>
+        
+        <div class="control-group">
+          <div class="controls">
+            <%= f.text_field :name, :class => 'text_field', :placeholder => "Name" %>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <%= f.text_field :price, :class => 'number_field', :placeholder => "Price" %>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <%= f.text_area :description, :class => 'text_area', :placeholder => "Description" %>
+          </div>
+        </div>
+        
+        <div>
+          <%= f.fields_for :pictures do |pic| %>
+            <%= pic.file_field :image %>
+            <%= pic.link_to_remove "Remove this image" %>
+          <% end %>
+          <p><%= f.link_to_add "Add a image", :pictures %></p>
+          </br>
+        </div>
 
-    <div class="form-actions">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%if @product.id%>
-        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),products_path, :class => 'btn' %>
-      <%else%>  
-        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),welcome_users_path, :class => 'btn' %>
-      <%end%>  
-    </div>
-  <% end %>
+        <div class="form-actions">
+          <%= f.submit nil, :class => 'btn btn-primary' %>
+          <%if @product.id%>
+            <%= link_to t('.cancel', :default => t("helpers.links.cancel")),products_path, :class => 'btn' %>
+          <%else%>  
+            <%= link_to t('.cancel', :default => t("helpers.links.cancel")),welcome_users_path, :class => 'btn' %>
+          <%end%>  
+        </div>
+      <% end %>
+    </body>
+  </div>  
 </div> 
