@@ -5,3 +5,10 @@ margin:0 auto;
 background-color:#D2D2D4;
 padding:20px;
 }
+input[type="email"],input[type="radio"],input[type="number"],input[type="text"], input[type="password"]{
+  height: 30px;
+}
+
+textarea{
+  height: 70px;
+}

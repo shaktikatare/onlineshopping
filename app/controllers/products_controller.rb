@@ -1,7 +1,12 @@
 class ProductsController < ApplicationController
   before_filter :authenticate_user!
   def new
-    @product=Product.new
+    if current_user.is_admin
+      @product=Product.new
+    else
+      flash[:error] = "Access denied"
+      redirect_to root_path
+    end
   end
   
   def index
@@ -11,44 +16,61 @@ class ProductsController < ApplicationController
   end
   
   def create
-    @product = Product.new(params[:product])
-    if @product.save
-      flash[:notice]="product save"    
+    if current_user.is_admin
+      @product = Product.new(params[:product])
+      if @product.save
+        flash[:notice]="product save"
+      else
+        flash[:partial]="please fill form correctly"
+      end
       redirect_to new_product_path
     else
-      flash[:partial]="please fill form correctly"
-      redirect_to new_product_path
+      flash[:error] = "Access denied"
+      redirect_to root_path
     end  
   end
   
   def show
-    @category = Category.find(params[:id])
-    @products = @category.products
   end
   
   def destroy
-    @product = Product.find(params[:id])
-    @cart=Cart.where(:product_id=>params[:id])
-    if @product.destroy and @cart.destroy_all
-      flash[:notice]="product remove"    
-      redirect_to products_path
+    if current_user.is_admin
+      @product = Product.find(params[:id])
+      @cart=Cart.where(:product_id=>params[:id])
+      if @product.destroy and @cart.destroy_all
+        flash[:notice]="product remove"    
+        redirect_to products_path
+      else
+        flash[:partial]="product is not remove"  
+      end
     else
-      flash[:partial]="product is not remove"  
-    end
+      flash[:error] = "Access denied"
+      redirect_to root_path
+    end  
   end
   
   def edit
-    @product=Product.find(params[:id]) 
+    if current_user.is_admin
+      @product=Product.find(params[:id]) 
+    else
+      flash[:error] = "Access denied"
+      redirect_to root_path
+    end  
   end
   
   def update
-    @product = Product.find(params[:id])
-    if @product.update_attributes(params[:product])
-      flash[:notice]="product updated"
-      redirect_to welcome_users_path
+    if current_user.is_admin
+      @product = Product.find(params[:id])
+      if @product.update_attributes(params[:product])
+        flash[:notice]="product updated"
+        redirect_to welcome_users_path
+      else
+        flash[:partial]="product is not updated"  
+      end
     else
-      flash[:partial]="product is not updated"  
-    end
+      flash[:error] = "Access denied"
+      redirect_to root_path
+    end  
   end
   
   def product_details
@@ -60,7 +82,7 @@ class ProductsController < ApplicationController
     @pid = params[:id]
     if @cart.present?
       @message = "already present to cart"
-    else 
+    else
       @cart = Cart.create(:user_id=>current_user.id, :product_id=>params[:id], :qty=>1)
       @message = "add to cart"
     end
@@ -70,7 +92,6 @@ class ProductsController < ApplicationController
   def remove_from_cart
     @cart=Cart.where(:user_id => current_user.id, :product_id=>params[:id]).first.destroy
     @products=Product.find(params[:id])
-    #redirect_to display_cart_products_path
   end
   
   def display_cart

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :getcategory
+  before_filter :get_category
   
    def after_sign_in_path_for(resource)
      if current_user.is_admin
@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
      end
    end
    
-   def getcategory
-     @category=Category.all
-   end
+   def get_category
+     @category = Category.all
+   end   
    
 end
