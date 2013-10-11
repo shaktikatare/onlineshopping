@@ -7,8 +7,8 @@ gem 'rails', '3.2.13'
 
 #bootstrap
 gem 'bootstrap-sass', '~> 2.3.2.1'
+gem 'pg'
 
-gem 'mysql2'
 gem "devise"
 gem 'carrierwave'
 # Gems used only for assets and not required
