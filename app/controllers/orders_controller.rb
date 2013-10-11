@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   before_filter :authenticate_user!
-  #before_filter :authenticate_admin_user, :only => 
   
   def new
     @order = Order.new
@@ -11,16 +10,18 @@ class OrdersController < ApplicationController
     @order.user_id = current_user.id
     @order.order_status = false
     if @order.save
+      AdminMailer.order_placed_email(current_user,@order)
       #TODO create Orderdetail with association of @order
       current_user.cart.each do |c|
         @orderdetails = Orderdetail.create(:order_id => @order.id, :product_id => c.product_id, :quantity => c.qty)
       end
       current_user.cart.destroy_all
       flash[:notice] = "order is placed successfully"
+      redirect_to root_path
     else
-      flash[:notice] = "order is not placed successfully"
+      flash[:partial] = "order is not placed successfully"
+      redirect_to new_order_path
     end
-    redirect_to root_path
   end
   
   def index
@@ -93,5 +94,4 @@ class OrdersController < ApplicationController
       redirect_to root_path
     end  
   end
-  
 end

@@ -13,7 +13,6 @@ Mydemo1::Application.routes.draw do
   end    
          
   resources :categories
-   
   resources :orders do
     collection do
       get :change_status
@@ -28,6 +27,10 @@ Mydemo1::Application.routes.draw do
     collection do
       get :welcome
       get :home
+      get :search_form
+      get :show_search_users
+      get :admin_email_form
+      get :admin_send_email
     end 
   end  
   
