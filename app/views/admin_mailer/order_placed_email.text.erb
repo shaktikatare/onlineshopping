@@ -1,0 +1,22 @@
+Your Order is Places successfully.
+  Following are the details of your order:-
+  
+    OrderId:-<%= @order.id%>
+    Name:-   <%= @order.full_name%>
+    Shipping Address:-<%= @order.shipping_address%>
+  
+  Following are the details of products:-
+     <%payable_amount=0%>  
+     <% @order.orderdetail.each do |d|%>
+       <% product = Product.find(d.product_id)%>
+         Product Name= <%= product.name%>
+         Product Price= <%=product.price%> 
+         Quantity = <%=d.quantity%>
+         sub Total =<%= product.price * d.quantity%> 
+         <% payable_amount = payable_amount + product.price * d.quantity %>  
+       <%end%>  
+     Total Payable Amount = <%= payable_amount%> 
+    
+Your order will be delivered shortly..
+Thank you for choosing us for shopping..    
+    

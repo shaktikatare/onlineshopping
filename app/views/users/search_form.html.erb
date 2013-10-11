@@ -1,0 +1,20 @@
+<%= render partial:"users/sidebar"%>
+<div class="alignment">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h5 class="panel-title">Search Form<h5>
+    </div>  
+    <div class="panel-body">
+      <form action='<%=show_search_users_users_path%>' method="get">
+        <lable>Search By UserId</lable>
+        <input type="radio" name="search" value=1>
+        </br>
+        <lable>Search By UserName</lable>
+        <input type="radio" name="search" value=2>
+        </br>
+        <input type="text" name="query" placeholder="enter value">
+        <input type="submit" value="Search" class="btn btn-danger">
+      </form>
+    </div>
+  </div>
+</div>
