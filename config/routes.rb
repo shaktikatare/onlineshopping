@@ -3,7 +3,6 @@ Mydemo1::Application.routes.draw do
   #TODO Alignment should be proper.
   resources :products do
     collection do
-      get :product_details
       get :add_to_cart
       get :display_cart
       get :remove_from_cart

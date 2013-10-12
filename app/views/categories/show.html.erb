@@ -1,23 +1,20 @@
 <%=link_to "show cart",display_cart_products_path(:id=>@category.id), class:"btn btn-primary"%>
   <ul class="products">
     <% @products.each do |p|%>
-        
-        <li class="thumbnail">
-        <a href=<%=product_details_products_path(:id=>p.id, :cid=>@category.id)%>> 
+      <li class="thumbnail">
+        <a href=<%=product_path(:id=>p.id) %> > 
           <%= image_tag(p.pictures.first.image,:size => "80x60")%>
           <h5><%=p.name%></h5>
           <p>Price:<%=p.price%></p>
         </a>
         <div><div id='<%=p.id%>'></div><div>
         <button class="addcart btn btn-info" data-id='<%=p.id%>'>Add to cart</button>
-       </li>
-              
+      </li>
     <% end %> 
   </ul>   
   <div class="form-actions">
     <%= link_to "back",root_path%>
   </div>
-
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
 </script>
@@ -26,6 +23,10 @@
     id = $(this).data('id');
     $.get('/products/add_to_cart?id='+id);
   });
+  
+  function show_error(){
+    alert("Cart is empty");
+  }
 </script>
 <style>
   ul.products li {

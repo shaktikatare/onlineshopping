@@ -1,7 +1,10 @@
 class OrdersController < ApplicationController
+  
   before_filter :authenticate_user!
+  before_filter :authorize_admin, :except => [:new, :index, :create]
   
   def new
+    redirect_to root_path, partial:"no element in cart"  unless current_user.cart.present?
     @order = Order.new
   end
   
@@ -10,88 +13,54 @@ class OrdersController < ApplicationController
     @order.user_id = current_user.id
     @order.order_status = false
     if @order.save
-      AdminMailer.order_placed_email(current_user,@order)
-      #TODO create Orderdetail with association of @order
       current_user.cart.each do |c|
-        @orderdetails = Orderdetail.create(:order_id => @order.id, :product_id => c.product_id, :quantity => c.qty)
+        @orderdetails = @order.orderdetails.create(:product_id => c.product_id, :quantity => c.qty)
       end
+      AdminMailer.order_placed_email(current_user,@order)
       current_user.cart.destroy_all
-      flash[:notice] = "order is placed successfully"
-      redirect_to root_path
+      redirect_to root_path, notice:"order is placed successfully"
     else
-      flash[:partial] = "order is not placed successfully"
-      redirect_to new_order_path
+      redirect_to new_order_path, partial:"order is not placed successfully"
     end
   end
   
+  def destroy
+    @order = Order.find(params[:id])
+    redirect_to welcome_users_path, notice:"order is deleted successfully" if @order.destroy
+  end
+  
   def index
-    if current_user.is_admin?
-      #TODO pluralize order
-      @orders = Order.all
-    else  
-      @orders = current_user.orders #Order.where(:user_id => current_user.id)
-    end  
+    @orders = current_user.is_admin? ? Order.all : current_user.orders
+    @orders = paginate_items(@orders)
   end
   
   def search_form
   end
   
   def show_search_orders
-    if current_user.is_admin
-      if params[:query] == ""
-        flash[:partial] = "Please fill the form completly"
-        redirect_to search_form_orders_path
-      else  
-        if params[:search]== "1"
-          @orders = Order.where("id like ?", "%#{params[:query]}%")
-          if @orders.length == 0
-            #flash[:partial] = "no record found"
-          end  
-        end  
-        if params[:search]== "2"
-          @orders = Order.where("full_name like ?", "%#{params[:query]}%")    
-          if @orders.length == 0
-            #flash[:partial] = "no record found"
-          end
-        end
-      end
+    if params[:query].blank?
+      redirect_to search_form_orders_path, partial:"Please fill the form completly"
     else 
-      flash[:error] = "Access denied"
-      redirect_to root_path
+      @orders = Order.where("id like ? OR full_name like ?", "%#{params[:query]}%", "%#{params[:query]}%")
+      @orders = paginate_items(@orders)
+      #flash[:partial] = "no record found" if @orders.length == 0
     end
   end
   
   def show_delivered_orders
-    if current_user.is_admin
-      @orders= Order.delivered
-    else
-      flash[:error] = "Access denied"
-      redirect_to root_path
-    end
+    @orders = paginate_items(Order.delivered)
   end
   
   def show_undelivered_orders
-    if current_user.is_admin
-      @orders= Order.un_delivered
-    else
-      flash[:error] = "Access denied"
-      redirect_to root_path
-    end  
+    @orders = paginate_items(Order.un_delivered)
   end
   
   
   def change_status
-    if current_user.is_admin
-      @order=Order.find(params[:order_id])
-      if @order.update_attributes(:order_status => params[:status])
-        flash[:notice]="Status is updated successfully"
-      else
-        flash[:notice]="Status is not updated successfully"
-      end  
-      redirect_to orders_path
-    else
-      flash[:error] = "Access denied"
-      redirect_to root_path
-    end  
+    @order = Order.find(params[:order_id])
+    @order.update_attributes(:order_status => params[:status]) ? flash[:notice]="Status is updated successfully" 
+                                                               : flash[:notice]="Status is not updated successfully"
+    redirect_to orders_path
   end
+  
 end

@@ -18,3 +18,9 @@ development:
   password: root
   socket: /var/run/mysqld/mysqld.sock
 
+#development:
+  #adapter: postgresql
+  #encoding: utf8
+  #database: mydemo1_development
+  #username: rails
+  #password: rails

@@ -1,5 +1,6 @@
 <%= render partial:"users/sidebar" %>
 <div class="alignment">
+  <%= will_paginate(@users, :renderer => WillPaginate::ActionView::LinkRenderer) %>
   <% @users.each do |user|%>
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -19,4 +20,5 @@
       </div>
     </div>
   <%end%>  
+  <%= will_paginate(@users, :renderer => WillPaginate::ActionView::LinkRenderer) %>
 </div>

@@ -9,6 +9,6 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :phone, :password, :country, :state, :city, :address, :is_admin
   validates :first_name, :phone, presence: true
   has_many :pictures, as: :imageable
-  has_many :orders
-  has_many :cart
+  has_many :orders, dependent: :destroy
+  has_many :cart, dependent: :destroy
 end

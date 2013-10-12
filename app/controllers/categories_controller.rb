@@ -1,13 +1,9 @@
 class CategoriesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :authorize_admin, :except => [:show]
   
   def new
-    if current_user.is_admin
-      @category = Category.new
-    else
-      flash[:error] = "Access denied"
-      redirect_to root_path
-    end  
+    @category = Category.new
   end
   
   def index
@@ -20,60 +16,24 @@ class CategoriesController < ApplicationController
   end
   
   def create
-    if current_user.is_admin
-      @category = Category.new(params[:category])
-      if @category.save
-        flash[:notice] = "category is created successfully" 
-        #TODO Redirect to index
-        redirect_to categories_path
-      else
-        flash[:partial] = "please enter category name"
-        redirect_to new_category_path  
-      end
-    else
-      flash[:error] = "Access denied"
-      redirect_to root_path
-    end  
+    @category = Category.new(params[:category])
+    @category.save ? (redirect_to categories_path, notice:"category is created successfully") 
+                   : (redirect_to new_category_path, partial:"please enter category name")
   end
   
   def destroy
-    if current_user.is_admin
-      @category = Category.find(params[:id])
-      if @category.destroy
-        flash[:notice] = "category remove"  
-        redirect_to categories_path
-      else
-        flash[:partial] = "category is not remove"  
-      end
-    else
-      flash[:error] = "Access denied"
-      redirect_to root_path
-    end  
+    @category = Category.find(params[:id])
+    @category.destroy ? (redirect_to categories_path, notice:"category remove") : flash[:partial] = "category is not remove"
   end
   
   def edit
-    if current_user.is_admin
-      @category = Category.find(params[:id])  
-    else
-      flash[:error] = "Access denied"
-      redirect_to root_path
-    end
+    @category = Category.find(params[:id])
   end
   
   def update
-    if current_user.is_admin
-      @category = Category.find(params[:id])
-      if @category.update_attributes(params[:category])
-        flash[:notice] = "category updated"
-        #TODO Redirect to index
-        redirect_to categories_path
-      else
-        flash[:partial] = "category is not updated"  
-      end
-    else
-      flash[:error] = "Access denied"
-      redirect_to root_path
-    end  
+    @category = Category.find(params[:id])
+    @category.update_attributes(params[:category]) ? (redirect_to categories_path, notice:"category updated")
+                                                   : flash[:partial] = "category is not updated"
   end
   
 end

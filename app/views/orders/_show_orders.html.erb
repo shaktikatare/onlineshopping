@@ -1,5 +1,6 @@
 <%= render partial:"users/sidebar" %>
 <div class="alignment">
+  <%= will_paginate(@orders, :renderer => WillPaginate::ActionView::LinkRenderer) %>
   <% @orders.each do |o|%>
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -20,19 +21,18 @@
             </tr>
           </thead>
           <tbody>
-          <%payable_amount=0%>   
-            <% o.orderdetail.each do |d|%>
-              <% product = Product.find(d.product_id)%>  
-                <tr>
-                  <td> <%=product.name%> </td>
-                  <td> <%=product.price%> </td>
-                  <td> <%=d.quantity%> </td>
-                  <td> <%= product.price * d.quantity%> </td>
-                  <% payable_amount = payable_amount + product.price * d.quantity %>
-                </tr>
-             <%end%>
-             <tr><td colspan="4">Total No. of Item => <%= o.orderdetail.length%></td></tr>
-             <tr><td colspan="4">Payable Amount => <%= payable_amount%></td></tr>      
+            <%payable_amount=0%>   
+            <% o.orderdetails.each do |d|%>
+              <tr>
+                <td> <%=d.product.name%> </td>
+                <td> <%=d.product.price%> </td>
+                <td> <%=d.quantity%> </td>
+                <td> <%= d.product.price * d.quantity%> </td>
+                <% payable_amount = payable_amount + d.product.price * d.quantity %>
+              </tr>
+            <%end%>
+            <tr><td colspan="4">Total No. of Item => <%= o.orderdetails.length%></td></tr>
+            <tr><td colspan="4">Payable Amount => <%= payable_amount%></td></tr>      
           </tbody>
         </table>
         <% if current_user.is_admin?%>
@@ -43,13 +43,15 @@
               <input type="hidden" name="order_id" value=<%= o.id%>>
               <input type="radio" name="status" value="true">Delivered</br>
               <input type="radio" name="status" value="false">Not Delivered
-              <input type="submit" value="change status" class="btn btn-danger">
+              <input type="submit" value="change status" class="btn btn-info">
             </form>
           </div></br>
+          <%=link_to "Remove Order", order_path(o), method:"delete",class:"btn btn-danger"%>
         <%else%>
           <div>Order Status Is:- <%= o.order_status==false ? "Not Delivered" : "Delivered" %></div></br>      
         <%end%>
       </div>
     </div>
-  <%end%>  
+  <%end%>
+  <%= will_paginate(@orders, :renderer => WillPaginate::ActionView::LinkRenderer) %>
 </div>

@@ -6,13 +6,7 @@
     </div>  
     <div class="panel-body">
       <form action='<%=show_search_orders_orders_path%>' method="get">
-        <lable>Search By OrderId</lable>
-        <input type="radio" name="search" value=1>
-        </br>
-        <lable>Search By Name</lable>
-        <input type="radio" name="search" value=2>
-        </br>
-        <input type="text" name="query" placeholder="enter value">
+        <input type="text" name="query" placeholder="enter orderId or name of order">
         <input type="submit" value="Search" class="btn btn-danger">
       </form>
     </div>

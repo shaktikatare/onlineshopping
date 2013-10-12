@@ -1,3 +1,5 @@
 <%if current_user.present?%>
 <%= render partial:"sidebar"%>
+<%else%>
+<%= render partial:"flash"%>
 <%end%>
