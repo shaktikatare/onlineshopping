@@ -1,9 +1,0 @@
-<div>
-  <% @product.pictures.each do |p| %>
-    <img src=<%=p.image%>>
-  <%end%></br>
-  <lable>Name: <%= @product.name%></lable></br>
-  <lable>Price: <%= @product.price%></lable></br>
-  <lable>Description: <%= @product.description%></lable></br>
-</div>
-<%= link_to "Back",product_path(:id =>params[:cid] )%>

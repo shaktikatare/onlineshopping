@@ -8,19 +8,19 @@
 #
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
-development:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  database: mydemo1_development
-  pool: 5
-  username: root
-  password: root
-  socket: /var/run/mysqld/mysqld.sock
-
 #development:
-  #adapter: postgresql
-  #encoding: utf8
-  #database: mydemo1_development
-  #username: rails
-  #password: rails
+#  adapter: mysql2
+#  encoding: utf8
+#  reconnect: false
+#  database: mydemo1_development
+#  pool: 5
+#  username: root
+#  password: root
+#  socket: /var/run/mysqld/mysqld.sock
+
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: mydemo1_development
+  username: rails
+  password: rails

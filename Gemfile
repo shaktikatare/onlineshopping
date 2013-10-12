@@ -7,8 +7,7 @@ gem 'rails', '3.2.13'
 
 #bootstrap
 gem 'bootstrap-sass', '~> 2.3.2.1'
-#gem 'pg'
-gem 'mysql2'
+gem 'pg'
 
 gem 'will_paginate-bootstrap'
 gem "devise"
