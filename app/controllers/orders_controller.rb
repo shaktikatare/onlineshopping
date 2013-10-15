@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(params[:order])
     @order.user_id = current_user.id
-    @order.order_status = false
+    #@order.order_status = false
     if @order.save
       current_user.cart.each do |c|
         @orderdetails = @order.orderdetails.create(:product_id => c.product_id, :quantity => c.qty)
