@@ -15,7 +15,7 @@
         <div>State:- <%= user.state%></div></br>
         <div>City:- <%= user.city%></div></br>
         <div>Address:- <%= user.address%></div></br>
-        <div>Last signedIn At:- <%= user.last_sign_in_at.strftime("%d/%m/%Y")%></div>
+        <div>Last signedIn At:- <%= user.last_sign_in_at.strftime("%d %b %Y")%></div>
         <%= link_to "Remove User", user_path(user), method:"delete",  class:"btn btn-danger" %>
       </div>
     </div>
