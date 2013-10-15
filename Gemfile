@@ -7,9 +7,11 @@ gem 'rails', '3.2.13'
 
 #bootstrap
 gem 'bootstrap-sass', '~> 2.3.2.1'
-gem "less-rails"
+
+#gem "less-rails"
 #gem "twitter-bootstrap-rails"
-gem "therubyracer"
+#gem "therubyracer"
+
 gem 'pg'
 
 gem 'will_paginate-bootstrap'
