@@ -24,8 +24,8 @@ class UsersController < ApplicationController
     if params[:query].blank?
       redirect_to search_form_users_path, partial:"Please fill the form completly"
     else  
-      @users = User.where("(email like ? OR first_name like ? OR last_name like ?) and is_admin like ?", 
-                          "%#{params[:query]}%","%#{params[:query]}%","%#{params[:query]}%", false)
+      @users = User.where("(email like ? OR first_name like ? OR last_name like ?) and is_admin=FALSE", 
+                          "%#{params[:query]}%","%#{params[:query]}%","%#{params[:query]}%")
       @users = paginate_items(@users)
       #flash[:partial] = "no record found" if @users.length == 0
     end

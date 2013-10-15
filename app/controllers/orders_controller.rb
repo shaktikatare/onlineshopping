@@ -40,8 +40,12 @@ class OrdersController < ApplicationController
   def show_search_orders
     if params[:query].blank?
       redirect_to search_form_orders_path, partial:"Please fill the form completly"
-    else 
-      @orders = Order.where("id like ? OR full_name like ?", "%#{params[:query]}%", "%#{params[:query]}%")
+    else
+      if params[:query].to_f
+        @orders = Order.where("id % 100 = ? ", "#{params[:query]}")
+      else
+        @orders = Order.where("full_name like ? ", "%#{params[:query]}%")
+      end
       @orders = paginate_items(@orders)
       #flash[:partial] = "no record found" if @orders.length == 0
     end
