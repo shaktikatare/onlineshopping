@@ -12,3 +12,56 @@ input[type="email"],input[type="radio"],input[type="number"],input[type="text"],
 textarea{
   height: 70px;
 }
+
+.margin{
+  margin:20px;
+}
+
+.cart_summary{
+  background-color:#FFE0E0;
+  height:100px;
+}
+
+.list_style{
+  list-style-type:none;
+}
+
+.btn_group_width{
+  width:93%;
+}
+
+.btn_style{
+  width:100%;
+  text-align:left;
+}
+
+.span_style{
+  float:right;
+}
+
+.ul_style{
+  width:100%;
+}
+
+.sidebar_body{
+  margin-left:20px;width:300px;
+  float:left;
+}
+
+.sidebar_content{
+  background-color:#E9E9EB;
+  margin-left:20px;
+  width:300px;
+  min-height:500px;
+  padding:10px;
+}
+
+.email_textara{
+  height: 190px;width: 420px;
+}
+.change_status{
+  width:150px;
+  background-color:#F2FFD8;
+}
+
+

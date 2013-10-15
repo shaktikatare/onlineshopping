@@ -6,16 +6,14 @@ Your Order is Places successfully.
     Shipping Address - <%= @order.shipping_address%>
   
   Following are the details of products -
-    <% payable_amount=0%>   
-    <% @order.orderdetails.each do |d|%>
-     Product Name - <%=d.product.name%> 
-     Product Price - <%=d.product.price%> 
-     Quantity Ordered -  <%=d.quantity%>
-     Sub Total - <%= d.product.price * d.quantity%> 
-      <% payable_amount = payable_amount + d.product.price * d.quantity %>
+    <% @order.orderdetails.each do |orderdetail|%>
+     Product Name - <%=orderdetail.product.name%> 
+     Product Price - <%=orderdetail.product.price%> 
+     Quantity Ordered -  <%=orderdetail.quantity%>
+     Sub Total - <%= orderdetail.product.price * orderdetail.quantity%> 
     <%end%>
     Total No. of Item = <%= @order.orderdetails.length%>
-    Payable Amount = <%= payable_amount + 100%>      
+    Payable Amount = <%= Orderdetail.payable_amount(@order) %>     
           
 Your order will be delivered shortly..
 Thank you for choosing us for shopping..    

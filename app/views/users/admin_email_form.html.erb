@@ -8,7 +8,7 @@
       <form name="myForm" action='<%= admin_send_email_users_path%>' method="get" onsubmit="return validateForm()" >
         <input type="text" name="sub" placeholder="Enter subject">
         </br>
-        <textarea name="body" placeholder="Enter Body Of email" style="height: 190px;width: 420px" ></textarea>
+        <textarea name="body" placeholder="Enter Body Of email" class="email_textarea" ></textarea>
         </br>
         <input type="submit" value="Send Email" class="btn btn-info">
       </form>
