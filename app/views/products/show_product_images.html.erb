@@ -1,15 +1,16 @@
 <%= render partial:"users/sidebar" %>
 <ul class="products">
-  <% @product.pictures.each do |i|%>
+  <% @product.pictures.each do |picture|%>
     <div class="alignment">
       <li class="thumbnail">
         <a>
-          <%= image_tag(i.image,:size => "80x60")%>
+          <%= image_tag(picture.image,:size => "80x60")%>
           <h5><%=@product.name%></h5>
           <p>Price:<%=@product.price%></p>
         </a>
       </li>
+      <%= link_to "Back",products_path, class:"btn btn-default"%>    
     </div>
   <% end %> 
 </ul>
-<%= link_to "Back",products_path, class:"btn btn-default"%>   
+

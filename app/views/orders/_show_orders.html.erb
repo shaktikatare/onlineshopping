@@ -9,7 +9,7 @@
       <div class="panel-body">
         <div>Recipient Name:- <%= order.full_name%></div>
         <div>shipping Address:- <%= order.shipping_address%></div>
-        <div>Order Date:- <%= order.created_at.strftime("%d/%m/%Y")%></div>
+        <div>Order Date:- <%= order.created_at.strftime("%d %b %Y")%></div>
         <div>Ordered Products:-</div>
         <table  class="table table-striped table-bordered table-condensed">
           <thead>
