@@ -11,6 +11,9 @@ gem 'bootstrap-sass', '~> 2.3.2.1'
 #gem "less-rails"
 #gem "twitter-bootstrap-rails"
 #gem "therubyracer"
+gem 'less-rails'
+gem 'therubyracer', '~> 0.10.2'
+
 
 gem 'pg'
 
