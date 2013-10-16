@@ -51,9 +51,9 @@
       <%else%>    
         <%= link_to "Proceed to payment", new_order_path, class:"btn btn-info" %>  
       <%end%>
+    <%= link_to "Back", request.referer,class:"btn btn-default" %>
     </div>
     
-    <%= link_to "back", request.referer %>
     <script>
       
       $(document).ready(function(){
@@ -81,6 +81,7 @@
           {
             amt= amt + parseInt(rows[i].textContent);
           }
+        $("#totalitem").text("Cart Summary "+rows.length+" Item(s)");  
         $("#payable_amount").text("Payable amount:"+amt); 
       }
       

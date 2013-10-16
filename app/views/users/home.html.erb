@@ -2,11 +2,11 @@
   <%= render partial:"sidebar"%>
 <%else%>
   <% if notice.present? %>
-    <p id="notice" class="alert alert-success" style="width:500px; margin:0 auto;padding:20px;">
+    <p id="notice" class="alert alert-success alignment" >
     <lable ><%=notice%></lable>
     </p>
   <%else if flash[:partial]%>
-    <p id="notice" class="alert alert-danger" style="width:500px; margin:0 auto;padding:20px;">
+    <p id="notice" class="alert alert-danger alignment" >
     <lable  ><%= flash[:partial] %></lable>
     </p>
     <%end%>
