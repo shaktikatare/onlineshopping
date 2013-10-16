@@ -6,15 +6,9 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #bootstrap
-gem 'bootstrap-sass', '~> 2.3.2.1'
+#gem 'bootstrap-sass', '~> 2.3.2.1'
 
-#gem "less-rails"
-#gem "twitter-bootstrap-rails"
-#gem "therubyracer"
-gem 'less-rails'
-gem 'therubyracer', '~> 0.10.2'
-
-
+gem "twitter-bootstrap-rails"
 gem 'pg'
 
 gem 'will_paginate-bootstrap'
@@ -27,7 +21,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+  gem 'therubyracer', '~> 0.10.2'
 
   gem 'uglifier', '>= 1.0.3'
 end
