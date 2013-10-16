@@ -12,7 +12,7 @@ Mydemo1::Application.configure do
   config.action_mailer.raise_delivery_errors = false
   
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'http://onlineshopping-of-grepruby.herokuapp.com/' }
+  config.action_mailer.default_url_options = { :host => 'http://onlineshopping-of-grepruby.herokuapp.com' }
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
