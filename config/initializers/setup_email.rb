@@ -7,4 +7,3 @@ ActionMailer::Base.smtp_settings = {
 :authentication => :login,
 :enable_starttls_auto => true
 }
-ActionMailer::Base.default_url_options[:host] = "onlineshopping-of-grepruby.herokuapp.com"
