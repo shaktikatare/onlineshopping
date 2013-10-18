@@ -27,6 +27,10 @@ class ProductsController < ApplicationController
     end
   end
   
+  def show_product_images
+    @product = Product.find(params[:id])
+  end
+  
   def destroy
     @product = Product.find(params[:id])
     @cart = Cart.where(:product_id=>params[:id])
