@@ -49,9 +49,14 @@
         
         <div>
           <%= f.submit "Sign up", class: "btn btn-primary" %>
-          <%= link_to "Fb", user_omniauth_authorize_path(:facebook), class:"btn btn-info" %>
-          <%= link_to image_tag('/assets/facebookButt.jpg'), user_omniauth_authorize_path(:facebook), :class => 'quick', :remote => true %>
-          <%= link_to "Google", user_omniauth_authorize_path(:google_oauth2), class:"btn btn-info" %>
+          
+         <a href=<%=user_omniauth_authorize_path(:facebook)%> >
+           <img src='/assets/facebookButt.jpg'>
+         </a>
+         <a href=<%=user_omniauth_authorize_path(:google_oauth2)%> >
+           <img src='/assets/googleButt.jpg'>
+         </a>  
+          
         </div>
       <% end %>
       <%= render "devise/shared/links" %>
