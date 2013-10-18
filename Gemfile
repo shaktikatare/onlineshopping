@@ -5,6 +5,14 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+#Prawn for pdf
+#gem 'prawn'
+
+#signup with facebook and google
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+
 #bootstrap
 gem "twitter-bootstrap-rails"
 gem 'pg'

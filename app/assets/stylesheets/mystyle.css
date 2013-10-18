@@ -63,5 +63,19 @@ textarea{
   width:150px;
   background-color:#F2FFD8;
 }
+.list-group-item {
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    display: block;
+    margin-bottom: -1px;
+    padding: 10px 15px;
+    position: relative;
+}
+
+
+
+
+
+
 
 

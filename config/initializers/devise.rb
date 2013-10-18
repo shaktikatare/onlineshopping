@@ -1,6 +1,19 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  
+  #==> signin with facebook provider
+  require "omniauth-facebook"
+  require "omniauth-google-oauth2"
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+  if Rails.env.development?    
+    config.omniauth :facebook, "556219471115785", "badb02ba3fd5f39f66c8aeca16808875"
+    config.omniauth :google_oauth2, "183493415570-b5gbn318mhscd6djufc3mcc7cnilqscs.apps.googleusercontent.com", "zxF8IY7L2yYXiFhlVsPMQoFZ", { access_type: "offline", approval_prompt: "" } 
+  else
+    config.omniauth :facebook, "432702943508574", "dfec37b079a780a6bbef28940fbbc343", {:scope => 'email, offline_access'} 
+    config.omniauth :google_oauth2, "183493415570-nt7t28fmac4ho96l17arbdqdmf8net76.apps.googleusercontent.com", "bT6vY03fg67QmHjQ2rMToDmf", { access_type: "offline", approval_prompt: "" }
+  end
+  
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.

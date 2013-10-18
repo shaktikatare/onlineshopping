@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   require 'will_paginate/array'
   
   def after_sign_in_path_for(resource)
-    if current_user.is_admin
+    if current_user.present? and current_user.is_admin
       '/users/welcome' 
     else
       super

@@ -1,5 +1,5 @@
 Mydemo1::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   #TODO Alignment should be proper.
   resources :products do
     collection do
@@ -30,6 +30,7 @@ Mydemo1::Application.routes.draw do
       get :show_search_users
       get :admin_email_form
       get :admin_send_email
+      get :signup_with_facebook
     end 
   end  
   
