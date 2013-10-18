@@ -1,6 +1,5 @@
 <div class="sidebar_body">
   <div class="sidebar_content">
-    
     <% if current_user.present? && current_user.is_admin %>
       <h5>Functions</h5>
       <div class="list-group list_style" >
@@ -9,7 +8,12 @@
         <li><%= link_to "Show category",categories_path, class:"list-group-item"  %></li>
         <li><%= link_to "Show Products",products_path, class:"list-group-item"  %></li>
         <li><%= link_to "Send Email to Users",admin_email_form_users_path, class:"list-group-item"  %></li>
-        
+        <li><%= link_to "Show All Users", users_path, class:"list-group-item" %></li>
+        <li><%= link_to "Search Users", search_form_users_path, class:"list-group-item" %></li>
+        <li><%= link_to "Show All Orders",orders_path, class:"list-group-item" %></li>
+        <li><%= link_to "Show Delivered Orders",show_delivered_orders_orders_path, class:"list-group-item" %></li>
+        <li><%= link_to "Show Undelivered Orders",show_undelivered_orders_orders_path, class:"list-group-item" %></li>
+        <li><%= link_to "Search Order", search_form_orders_path, class:"list-group-item" %></li>
         <li>
         <div class="btn-group btn_group_width" >
           
@@ -42,15 +46,14 @@
       </div>
     <%else%> 
       <h5>Categories</h5>
-      <div class="list-group">
-        <%@category.each do |c|%>
+      <div class="list-group list_style">
+        <%@categories.each do |c|%>
           <li><%= link_to c.name, category_path(c), :id=>"#{c.id}", class:"list-group-item"  %></li>
         <%end%>
       </div>
     <% end %>
     </div>          
   </div>
-  
   
 <% if notice.present? %>
   <p id="notice" class="alert alert-success alignment">
@@ -62,6 +65,8 @@
   </p>
   <%end%>
 <%end%>
+
+
 <script>
   $(document).ready(function(){
     $("#notice").fadeOut(2000); 

@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:show]
   before_filter :authorize_admin, :only => [:index, :new, :create, :destroy, :edit, :update]
   def new
     @product = Product.new 
@@ -17,6 +17,14 @@ class ProductsController < ApplicationController
   
   def show
     @product = Product.find(params[:id])
+  end
+  def show_search_products
+    if params[:query].blank?
+      redirect_to root_path, partial:"Please fill the form completly"
+    else  
+      @products = Product.where("name like ?", "%#{params[:query]}%")
+      redirect_to root_path, notice: "no record found" if @products.length == 0 
+    end
   end
   
   def destroy
@@ -59,10 +67,6 @@ class ProductsController < ApplicationController
   def update_qty
     @cart = Cart.find(params[:id])
     @cart.update_attributes(:qty=>params[:qty])
-  end
-  
-  def show_product_images
-    @product = Product.find(params[:id])
   end
   
 end

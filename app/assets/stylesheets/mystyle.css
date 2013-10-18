@@ -5,8 +5,32 @@ margin:0 auto;
 background-color:#D2D2D4;
 padding:20px;
 }
+
+.banner-alignment
+{
+width:47%; 
+margin:0px auto;
+padding:0px;
+}
+.product-alignment
+{
+width:950px; 
+float:right;
+margin:0 auto;
+padding:-10px;
+}
+
+
 input[type="email"],input[type="radio"],input[type="number"],input[type="text"], input[type="password"]{
   height: 30px;
+}
+ul.products li {
+      width: 25%;
+      display: inline-block;
+}
+
+.float-left{
+  float:left;
 }
 
 textarea{
@@ -44,7 +68,9 @@ textarea{
 }
 
 .sidebar_body{
-  margin-left:20px;width:300px;
+  margin-left:20px;
+  width:320px;
+  min-height:100%;
   float:left;
 }
 
@@ -70,6 +96,18 @@ textarea{
     margin-bottom: -1px;
     padding: 10px 15px;
     position: relative;
+}
+
+.bx-wrapper{
+  max-width: 47%;
+}
+
+.bx-viewport{
+  width: 129%;
+}
+
+.bx-wrapper .bx-next{
+  right: 189px;
 }
 
 

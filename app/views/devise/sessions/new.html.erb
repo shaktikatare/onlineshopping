@@ -1,7 +1,10 @@
 <div class="alignment">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h5 class="panel-title">SignIn Form</h5>
+      <h5 class="panel-title float-left">SignIn Form</h5>
+      <a href=<%=root_path%>  >
+           <img src='/assets/close_signup.png'>
+      </a>
     </div>
     <div class="panel-body">
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>

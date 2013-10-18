@@ -6,7 +6,7 @@ Mydemo1::Application.routes.draw do
       get :add_to_cart
       get :display_cart
       get :remove_from_cart
-      get :show_product_images
+      get :show_search_products
       get :update_qty
     end
   end    
