@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
    
    def get_category
-     @category = Category.all
+     @categories = Category.all
    end  
    
    def authorize_admin
