@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show]
+  before_filter :authenticate_user!, :except => [:show, :show_search_products]
   before_filter :authorize_admin, :only => [:index, :new, :create, :destroy, :edit, :update]
   def new
     @product = Product.new 
