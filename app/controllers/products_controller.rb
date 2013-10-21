@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
   end
+  
   def show_search_products
     if params[:query].blank?
       redirect_to root_path, partial:"Please fill the form completly"

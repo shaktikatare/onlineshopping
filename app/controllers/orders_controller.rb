@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
     if params[:query].blank?
       redirect_to search_form_orders_path, partial:"Please fill the form completly"
     else
-      if params[:query].to_f
+      if params[:query].to_f != 0.0
         @orders = Order.where("id % 100 = ? ", "#{params[:query]}")
       else
         @orders = Order.where("full_name like ? ", "%#{params[:query]}%")

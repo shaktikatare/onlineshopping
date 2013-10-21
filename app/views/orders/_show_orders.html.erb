@@ -34,13 +34,13 @@
           </tbody>
         </table>
         <% if current_user.is_admin?%>
-          <div>Order Status Is:- <%= order.order_status==false ? "Not Delivered" : "Delivered" %></div>
           <div class="change_status">
             <lable>Change status</lable></br>
             <form action=<%= change_status_orders_path%> >
               <input type="hidden" name="order_id" value=<%= order.id%>>
-              <input type="radio" name="status" value="true">Delivered</br>
-              <input type="radio" name="status" value="false">Not Delivered
+              <input type="radio" name="status" value="true" <%if order.order_status==true%> checked="checked"<%end%>>Delivered
+              </br>
+              <input type="radio" name="status" value="false"<%if order.order_status==false%> checked="checked"<%end%>>Not Delivered
               <input type="submit" value="change status" class="btn btn-info">
             </form>
           </div></br>

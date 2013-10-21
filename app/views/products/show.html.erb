@@ -1,12 +1,14 @@
 <%= render partial:"users/sidebar"%>
 <div class="alignment">
   <% @product.pictures.each do |picture| %>
-    <img src=<%=picture.image%> />
-  <%end%></br>
+    <li class="thumbnail">
+    <%= image_tag(picture.image,:size => "166x194")%>
+    </li>
+  <%end%>
+  </br>
   <lable>Name: <%= @product.name%></lable></br>
   <lable>Price: <%= @product.price%></lable></br>
   <lable>Description: <%= @product.description%></lable></br>
-  <%= link_to "Back", request.referer,class:"btn btn-default" %>  
 </div>
 
 
