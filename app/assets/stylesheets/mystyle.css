@@ -6,6 +6,10 @@ background-color:#D2D2D4;
 padding:20px;
 }
 
+.slider-ul{
+padding:0;
+margin: 0 !important;
+}
 .banner-alignment
 {
 width:47%; 
