@@ -10,4 +10,13 @@ class Orderdetail < ActiveRecord::Base
     end
     return @amount
   end
+  
+  def self.total_monthly_sales(orders)
+    @amount=0
+    orders.each do |order|
+      @amount = @amount + Orderdetail.payable_amount(order)
+    end
+    return @amount
+  end
+  
 end

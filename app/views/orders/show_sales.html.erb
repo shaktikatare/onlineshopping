@@ -1,0 +1,38 @@
+<%= render partial:"users/sidebar" %>
+<div class="alignment">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h5 class"panel-title">Sales Report</h5>
+    </div>
+    <div class="panel-body">
+      <table  class="table table-striped table-bordered table-condensed">
+          <% @orders_month.sort.each do |month, orders| %>
+            <thead>
+              <tr>
+                <th colspan="4"><%= month.strftime('%B') %></th>
+              </tr>
+              <tr>
+                <th>Order Id</th>
+                <th>User Id</th>
+                <th>Date</th>
+                <th>Total amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% orders.each do |order|%>
+                <tr>
+                <td><%=order.id%></td>
+                <td><%=order.user_id%></td>
+                <td><%=order.created_at.strftime("%d %b %y")%></td>
+                <td><%=Orderdetail.payable_amount(order)%></td>
+                </tr>
+              <%end%>
+              <tr>
+                <td colspan="4">Total Sales Of <%= month.strftime('%B') %> is  <%=Orderdetail.total_monthly_sales(orders)%></td>
+              </tr>
+            </tbody>
+          <%end%>  
+      </table>
+    </div>
+  </div>
+</div>

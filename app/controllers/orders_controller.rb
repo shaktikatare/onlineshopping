@@ -67,4 +67,8 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
   
+  def show_sales
+    @orders_month = Order.all.group_by{|order| order.created_at.beginning_of_month}
+  end
+  
 end
