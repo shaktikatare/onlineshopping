@@ -1,0 +1,35 @@
+<%= render partial:"users/sidebar" %>
+<div class="alignment">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h5 class"panel-title">Yearly Sales Report</h5>
+    </div>
+    <div class="panel-body">
+      <table  class="table table-striped table-bordered table-condensed">
+          <% @orders_year.sort.each do |year, orders| %>
+            <thead>
+              <tr>
+                <th colspan="4">Sales of -<%= year.strftime('%Y') %></th>
+              </tr>
+              <tr>
+                <th>Month</th>
+                <th>Total amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%@orders_month = orders.group_by{|order| order.created_at.beginning_of_month}%>
+              <% @orders_month.sort.each do |month,order|%>
+                <tr>
+                <td><%=month.strftime("%B")%></td>
+                <td><%=Orderdetail.total_sales(order)%></td>
+                </tr>
+              <%end%>
+              <tr>
+                <th colspan="4">Total Sales Of <%= year.strftime('%Y') %> is  <%=Orderdetail.total_sales(orders)%></th>
+              </tr>
+            </tbody>
+          <%end%>  
+      </table>
+    </div>
+  </div>
+</div>

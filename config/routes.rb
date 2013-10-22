@@ -8,6 +8,7 @@ Mydemo1::Application.routes.draw do
       get :remove_from_cart
       get :show_search_products
       get :show_product_images
+      get :show_product_by_category
       get :update_qty
     end
   end    
@@ -20,7 +21,8 @@ Mydemo1::Application.routes.draw do
       get :show_undelivered_orders
       get :search_form
       get :show_search_orders
-      get :show_sales
+      get :show_monthly_sales
+      get :show_yearly_sales
     end
   end  
    
