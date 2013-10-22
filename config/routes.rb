@@ -20,6 +20,7 @@ Mydemo1::Application.routes.draw do
       get :show_undelivered_orders
       get :search_form
       get :show_search_orders
+      get :show_sales
     end
   end  
    
