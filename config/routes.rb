@@ -9,6 +9,7 @@ Mydemo1::Application.routes.draw do
       get :show_search_products
       get :show_product_images
       get :show_product_by_category
+      get :remove_product_image
       get :update_qty
     end
   end    

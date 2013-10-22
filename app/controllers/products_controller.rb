@@ -43,6 +43,12 @@ class ProductsController < ApplicationController
                                            : flash[:partial]="product is not remove"
   end
   
+  def remove_product_image
+    @picture = Picture.find(params[:id])
+    @picture.destroy ? (redirect_to products_path, notice:"image removed successfully") 
+                     : (redirect_to products_path, partial:"image not removed successfully")                  
+  end
+  
   def edit
     @product = Product.find(params[:id])
   end

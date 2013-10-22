@@ -4,6 +4,7 @@
     <% @product.pictures.each do |p|%>
       <li class="thumbnail">
         <%= image_tag(p.image,:size => "166x194")%>
+        <%=link_to "Remove Image" , remove_product_image_products_path(:id=>p.id), class:"btn btn-danger" %>
       </li>
     <% end %>
   </ul>
