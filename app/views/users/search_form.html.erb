@@ -2,13 +2,31 @@
 <div class="alignment">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h5 class="panel-title">Search Form<h5>
+      <h5 class="panel-title">Search User<h5>
     </div>  
     <div class="panel-body">
       <form action='<%=show_search_users_users_path%>' method="get">
-        <input type="text" name="query" placeholder="Enter Email or Name">
-        <input type="submit" value="Search" class="btn btn-danger">
+        <div id="query_error"></div>
+        <input type="text" id="query" name="query" placeholder="Enter Email or Name">
+        <input type="submit" value="Search" class="btn btn-danger", onclick="return validate_form()" >
       </form>
     </div>
   </div>
 </div>
+
+<script>
+function validate_form()
+  { 
+    if($("#query").val() == "")
+    { 
+      $("#query_error").text("Please Enter email or name").fadeIn(1000);
+      return false;
+    }
+    if (!isNaN($("#query").val()))
+    {
+      $("#query_error").text("Please Enter email or name").fadeIn(1000);
+      return false;
+    }
+   return true;
+  }  
+</script>

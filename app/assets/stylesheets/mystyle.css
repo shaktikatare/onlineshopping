@@ -18,20 +18,13 @@ margin: 0 !important;
 {
 width:47%; 
 margin:0px auto;
+margin-left: 473px;
 padding:10px;
 }
 
 .logo{
   font-size: 25px;
 }
-.product-alignment
-{
-width:950px; 
-float:right;
-margin:0 auto;
-padding:-10px;
-}
-
 
 input[type="email"],input[type="radio"],input[type="number"],input[type="text"], input[type="password"]{
   height: 30px;
@@ -124,7 +117,7 @@ textarea{
 
 
 
-
+    
 
 
 

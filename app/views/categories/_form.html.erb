@@ -6,13 +6,14 @@
     </div>
     <div class="panel-body">
       <%= form_for(@category) do |f|%>
+        <div id="form_error"></div>
         <%= f.text_field :name, :placeholder => "Category Name"%>
         </br></br>
         <% if @category.id%>
           <%= f.submit "Update Category", class:"btn btn-primary"%>
           <%= link_to "back", categories_path%>
         <% else%>   
-          <%= f.submit "Add Category", class:"btn btn-primary"%>
+          <%= f.submit "Add Category", class:"btn btn-primary",onclick:"return validate_form()"%>
           <%= link_to "Cancel", welcome_users_path, class:"btn btn-default"%>
         <%end%>
       <%end%>
@@ -20,3 +21,14 @@
   </div>  
 </div>
 
+<script>
+  function validate_form()
+  { 
+   if($("#category_name").val() == "")
+    {
+      $("#form_error").text("Please Enter Category").fadeIn(1000);
+     return false;
+    }
+    return true;
+  }
+</script>

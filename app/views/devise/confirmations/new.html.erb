@@ -1,19 +1,32 @@
+<%= render partial:"users/sidebar"%>
 <div class="alignment">
   <div class="panel panel-primary">
-    <div class="pane-heading">
+    <div class="panel-heading">
       <h2 class="panel-title">Resend confirmation instructions</h2>
     </div>
     <div class="panel-body">
       <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
         <%= devise_error_messages! %>
-
         <div><%= f.label :email %><br />
-        <%= f.email_field :email, :autofocus => true %></div>
-
-        <div><%= f.submit "Resend confirmation instructions" %></div>
+          <div id="form_error"></div>
+          <%= f.email_field :email, :autofocus => true %>
+        </div>
+        <div>
+          <%= f.submit "Resend confirmation instructions", onclick:"return validate_form()" %>
+        </div>
       <% end %>
-
       <%= render "devise/shared/links" %>
     </div>
-  </div> 
+  </div>
 </div>
+<script>
+  function validate_form()
+  { 
+   if($("#user_email").val() == "")
+    {
+      $("#form_error").text("Please Enter Email").fadeIn(1000);
+     return false;
+    }
+    return true;
+  }
+</script>

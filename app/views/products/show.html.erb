@@ -1,14 +1,20 @@
 <%= render partial:"users/sidebar"%>
 <div class="alignment">
-  <% @product.pictures.each do |picture| %>
-    <li class="thumbnail">
-    <%= image_tag(picture.image,:size => "166x194")%>
-    </li>
-  <%end%>
-  </br>
-  <lable>Name: <%= @product.name%></lable></br>
-  <lable>Price: <%= @product.price%></lable></br>
-  <lable>Description: <%= @product.description%></lable></br>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h5 class="panel-title">View Product Image</h5>
+    </div>
+    <div class="panel-body">
+    <% @product.pictures.each do |picture| %>
+      <li class="thumbnail">
+      <%= image_tag(picture.image,:size => "166x194")%>
+      </li>
+    <%end%>
+    </br>
+    <lable>Name: <%= @product.name%></lable></br>
+    <lable>Price: <%= @product.price%></lable></br>
+    <lable>Description: <%= @product.description%></lable></br>
+  <div>
 </div>
 
 
