@@ -6,15 +6,76 @@
     </div>  
     <div class="panel-body">
       <%= form_for(@order) do |f|%>
-         <%= f.text_field :full_name, :class => 'text_field', :placeholder => "Full Name" %></br>
-         <%= f.text_area :shipping_address, :placeholder => "Shipping address" %></br>
-         <%= f.text_field :city, :class => 'text_field', :placeholder => "City" %></br>
-         <%= f.text_field :state, :class => 'text_field', :placeholder => "State" %></br>
-         <%= f.text_field :pin_code, :class => 'text_field', :placeholder => "Pin Code" %></br>
-         <%= f.text_field :phone, :class => 'text_field', :placeholder => "phone" %></br>
-         <%= f.submit "Place Order", :class => 'btn btn-primary' %>
+        <%= f.hidden_field :stripe_card_token %>
+        <div id="first_name_error"></div>
+        <%= f.text_field :full_name, :class => 'text_field', :placeholder => "Full Name" %></br>
+        <div id="shipping_address_error"></div>
+        <%= f.text_area :shipping_address, :placeholder => "Shipping address" %></br>
+        <div id="city_error"></div>
+        <%= f.text_field :city, :class => 'text_field', :placeholder => "City" %></br>
+        <div id="state_error"></div>
+        <%= f.text_field :state, :class => 'text_field', :placeholder => "State" %></br>
+        <%= f.text_field :pin_code, :class => 'text_field', :placeholder => "Pin Code" %></br>
+        <div id="phone_error"></div>
+        <%= f.text_field :phone, :class => 'text_field', :placeholder => "phone" %></br>
+        <div class="field">
+          <%= label_tag :card_number, "Credit Card Number " %>
+          <%= text_field_tag :card_number, nil, name: nil %>
+        </div>
+        <div class="field">
+          <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+          <%= text_field_tag :card_code, nil, name: nil %>
+        </div>
+        <div class="field">
+          <%= label_tag :card_month, "Card Expiration" %>
+          <%= select_month nil, {add_month_numbers_true: true}, {name: nil, id: "card_month"}%>
+          <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}%>
+        </div>
+        <div id="stripe_error">
+          <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+        </div>
+        <div class="actions"><%= f.submit "Place Order",:class => 'btn btn-primary submit', onclick:"return validate_form()" %></div>
       <%end%>
       <%= link_to "Cancel", home_users_path, class: "btn btn-danger"%>
     </div>
   </div>
 </div>
+
+<script>
+function validate_form()
+  { var valid = true;
+    
+    if($("#order_first_name").val() == "")
+    {
+      $("#first_name_error").text("Please Enter First Name ").fadeIn(1000);
+      valid = false;
+    }
+          
+    if($("#order_shipping_address").val() == "")
+    {
+      $("#shipping_address_error").text("Please Enter shipping address ").fadeIn(1000);
+      valid = false;
+    }
+    
+    if($("#order_city").val() == "")
+    {
+      $("#city_error").text("Please Enter City ").fadeIn(1000);
+      valid = false; 
+    }
+    
+
+    if($('#order_state').val() == "")
+    {
+      $("#state_error").text("Please Enter State ").fadeIn(1000);
+      valid = false; 
+    }
+    if($('#order_phone').val() == "")
+    {
+      $("#phone_error").text("Please Enter Phone ").fadeIn(1000);
+      valid = false; 
+    }
+    
+  return valid;
+}
+</script>
+

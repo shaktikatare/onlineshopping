@@ -11,8 +11,8 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(params[:order])
     @order.user_id = current_user.id
-    #@order.order_status = false
-    if @order.save
+    
+    if @order.save_with_payment
       current_user.cart.each do |c|
         @orderdetails = @order.orderdetails.create(:product_id => c.product_id, :quantity => c.qty)
       end
@@ -20,13 +20,13 @@ class OrdersController < ApplicationController
       current_user.cart.destroy_all
       redirect_to root_path, notice:"order is placed successfully"
     else
-      redirect_to new_order_path, partial:"order is not placed successfully"
+      redirect_to new_order_path, notice:"order is not placed successfully"
     end
-  end
-  
+  end 
+     
   def destroy
     @order = Order.find(params[:id])
-    redirect_to welcome_users_path, notice:"order is deleted successfully" if @order.destroy
+    redirect_to orders_path, notice:"order is deleted successfully" if @order.destroy
   end
   
   def index
