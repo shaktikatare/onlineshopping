@@ -10,51 +10,14 @@
   <title>OnlineShopping</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "https://js.stripe.com/v1/", "application" %>
+  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
   <%= csrf_meta_tags %>
-  <link href="/lib/jquery.bxslider.css" rel="stylesheet" />
   
 </head>
 <body style="background-color:#F5F5F5">
-  <nav class="navbar navbar-default" role="navigation">
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <% if current_user.present?%>
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "SignOut","/users/sign_out", :method => :delete%></li>
-        </ul>
-        <ul class="nav navbar-nav">
-          <li><%= link_to  "OnlineShopping" , current_user.is_admin ? "/users/welcome" : "/users/home", class:"logo" %> </li>
-          <li><%= link_to "UserProfile",edit_user_registration_path%></li>
-          <%unless current_user.is_admin%>
-            <li><%= link_to "Previous Orders", orders_path%></li>
-          <%end%>
-          <li><%= link_to "Welcome "+current_user.first_name,"#"%></li>
-        </ul>
-        <% unless current_user.is_admin%>
-          <form action = <%= show_search_products_products_path%> class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input type="text" name="query" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
-        <%end%>
-      <%else%>
-        <ul class="nav navbar-nav">
-          <li><%= link_to  "OnlineShopping" ,"/users/home", class:"logo" %></li>
-          <li><%= link_to "SignIn","/users/sign_in"%></li>
-          <li><%= link_to "SignUp","/users/sign_up"%></li> 
-        </ul> 
-      <%end%>
-      <% unless current_user.present?%>
-        <form action = <%= show_search_products_products_path%> class="navbar-form navbar-left" role="search">
-          <div class="form-group">
-            <input type="text" name="query" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-      <%end%>              
-    </div>
-  </nav>
-<%= yield %>
+  <%= render partial:"layouts/header"%>
+  <%= yield %>
 
 </body>
 </html>
