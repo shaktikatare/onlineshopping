@@ -5,11 +5,15 @@
       <h5 class="panel-title">Product Image</h5>
     </div>
     <div class="panel-body">
-    <% @product.pictures.each do |picture| %>
-      <li class="thumbnail">
-      <%= image_tag(picture.image,:size => "166x194")%>
-      </li>
-    <%end%>
+    <%if @product.pictures.length > 0 %>
+      <% @product.pictures.each do |picture| %>
+        <li class="thumbnail">
+        <%= image_tag(picture.image,:size => "166x194")%>
+        </li>
+      <%end%>
+    <%else%> 
+    <%= image_tag("/assets/default_image.jpg",:size => "166x194")%> 
+    <%end%>  
     </br>
     <lable>Name: <%= @product.name%></lable></br>
     <lable>Price: <%= @product.price%></lable></br>
