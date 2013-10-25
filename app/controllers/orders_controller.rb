@@ -11,11 +11,11 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(params[:order])
     @order.user_id = current_user.id
-    
-    if @order.save_with_payment
+    if @order.save_with_payment 
       current_user.cart.each do |c|
-        @orderdetails = @order.orderdetails.create(:product_id => c.product_id, :quantity => c.qty)
+      @orderdetails = @order.orderdetails.create(:product_id => c.product_id, :quantity => c.qty)
       end
+      @order.make_charge
       AdminMailer.order_placed_email(current_user,@order)
       current_user.cart.destroy_all
       redirect_to root_path, notice:"order is placed successfully"
