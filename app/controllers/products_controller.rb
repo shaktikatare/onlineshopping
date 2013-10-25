@@ -53,8 +53,8 @@ class ProductsController < ApplicationController
     
   def remove_product_image
     @picture = Picture.find(params[:id])
-    @picture.destroy ? (redirect_to show_available_products_products_path, notice:"image removed successfully") 
-                     : (redirect_to show_available_products_products_path, partial:"image not removed successfully")                  
+    @picture.destroy ? (redirect_to products_path(:availability => true), notice:"image removed successfully") 
+                     : (redirect_to products_path(:availability => true), partial:"image not removed successfully")                  
   end
   
   def edit
