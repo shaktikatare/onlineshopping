@@ -1,0 +1,11 @@
+<% @category.each do |c| %>
+  <% c.products.available.each do |p| %>
+    <tr>
+      <td><lable><%= p.name%></lable></td>
+      <td><lable><%= c.name%></lable></td>
+      <td><%= link_to "change", change_availability_products_path(:id=>p), class: "btn btn-danger"%></td>
+      <td><%= link_to "Edit", edit_product_path(p),method: :get, class: "btn btn-warning"%></td>
+      <td><%= link_to "Images", show_product_images_products_path(:id=>p.id),method: :get, class: "btn btn-info"%></td>
+    </tr>
+  <%end%>
+<%end%>

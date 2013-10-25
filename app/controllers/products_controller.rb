@@ -16,12 +16,9 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
   
-  def show_unavailable_products
-    @category = Category.all 
-  end
-  
-  def show_available_products
-    @category = Category.all 
+  def index
+    @category = Category.all
+    @available = params[:available] 
   end
   
   def show_product_by_category
@@ -45,10 +42,12 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @cart = Cart.where(:product_id=>params[:id])
     @product.availability==true ? @product.update_attributes(:availability => false) 
-                               : @product.update_attributes(:availability => true)
+                                : @product.update_attributes(:availability => true)
     
     @cart.destroy_all
-    redirect_to show_available_products_products_path, notice: "Availaiblity change successfully"                                              
+    flash[:notice] = "Change Availability successfully"
+    @product.availability==true ? (redirect_to products_path(:availability => true))
+                                : (redirect_to products_path(:availability => false))                                             
   end
   
     
