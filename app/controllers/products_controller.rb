@@ -41,13 +41,13 @@ class ProductsController < ApplicationController
   def change_availability
     @product = Product.find(params[:id])
     @cart = Cart.where(:product_id=>params[:id])
-    @product.availability==true ? @product.update_attributes(:availability => false) 
-                                : @product.update_attributes(:availability => true)
+    @product.availability ? @product.update_attributes(:availability => false) 
+                          : @product.update_attributes(:availability => true)
     
     @cart.destroy_all
     flash[:notice] = "Change Availability successfully"
-    @product.availability==true ? (redirect_to products_path(:availability => true))
-                                : (redirect_to products_path(:availability => false))                                             
+    @product.availability ? (redirect_to products_path(:availability => true))
+                          : (redirect_to products_path(:availability => false))                                             
   end
   
     
