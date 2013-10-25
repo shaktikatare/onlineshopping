@@ -6,7 +6,8 @@
         <li><%= link_to   "Add New Category", new_category_path, class:"list-group-item"  %></li>
         <li><%= link_to "Add New Product",new_product_path, class:"list-group-item"  %></li>
         <li><%= link_to "Show category",categories_path, class:"list-group-item"  %></li>
-        <li><%= link_to "Show Products",products_path, class:"list-group-item"  %></li>
+        <li><%= link_to "Show Available Products",show_available_products_products_path, class:"list-group-item"  %></li>
+        <li><%= link_to "Show UnAvailable Products",show_unavailable_products_products_path, class:"list-group-item"  %></li>
         <li><%= link_to "Send Email to Users",admin_email_form_users_path, class:"list-group-item"  %></li>
         <li><%= link_to "Show All Users", users_path, class:"list-group-item" %></li>
         <li><%= link_to "Search Users", search_form_users_path, class:"list-group-item" %></li>

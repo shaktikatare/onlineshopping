@@ -1,12 +1,9 @@
 class ProductsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show, :show_search_products]
-  before_filter :authorize_admin, :only => [:index, :new, :create, :destroy, :edit, :update]
+  before_filter :authorize_admin, :except => [:show, :show_search_products, :add_to_cart, :update_qty, :display_cart, :remove_from_cart]
+  
   def new
     @product = Product.new 
-  end
-  
-  def index
-    @category = Category.all 
   end
   
   def create
@@ -19,6 +16,14 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
   
+  def show_unavailable_products
+    @category = Category.all 
+  end
+  
+  def show_available_products
+    @category = Category.all 
+  end
+  
   def show_product_by_category
     @category = Category.find(params[:id])
   end
@@ -27,7 +32,7 @@ class ProductsController < ApplicationController
     if params[:query].blank?
       redirect_to root_path, partial:"Please fill the form completly"
     else  
-      @products = Product.where("name like ?", "%#{params[:query]}%")
+      @products = Product.where("name like ? and availability = true", "%#{params[:query]}%")
       redirect_to root_path, notice: "no record found" if @products.length == 0 
     end
   end
@@ -36,17 +41,21 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
   
-  def destroy
+  def change_availability
     @product = Product.find(params[:id])
     @cart = Cart.where(:product_id=>params[:id])
-    @product.destroy and @cart.destroy_all ? (redirect_to products_path, notice:"product remove") 
-                                           : flash[:partial]="product is not remove"
+    @product.availability==true ? @product.update_attributes(:availability => false) 
+                               : @product.update_attributes(:availability => true)
+    
+    @cart.destroy_all
+    redirect_to show_available_products_products_path, notice: "Availaiblity change successfully"                                              
   end
   
+    
   def remove_product_image
     @picture = Picture.find(params[:id])
-    @picture.destroy ? (redirect_to products_path, notice:"image removed successfully") 
-                     : (redirect_to products_path, partial:"image not removed successfully")                  
+    @picture.destroy ? (redirect_to show_available_products_products_path, notice:"image removed successfully") 
+                     : (redirect_to show_available_products_products_path, partial:"image not removed successfully")                  
   end
   
   def edit

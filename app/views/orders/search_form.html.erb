@@ -5,9 +5,10 @@
       <h5 class="panel-title">Search Order<h5>
     </div>  
     <div class="panel-body">
+      <strong>Search Order By OrderId or Name or stripe customer token</strong></br></br>
       <form action='<%=show_search_orders_orders_path%>' method="get">
         <div id="query_error"></div>
-        <input type="text" id="query"name="query" placeholder="Enter OrderId or Name">
+        <input type="text" id="query"name="query" ></br>
         <input type="submit" value="Search" class="btn btn-danger", onclick="return validate_form()">
       </form>
     </div>

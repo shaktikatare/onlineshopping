@@ -1,6 +1,5 @@
 Mydemo1::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  #TODO Alignment should be proper.
   resources :products do
     collection do
       get :add_to_cart
@@ -11,6 +10,9 @@ Mydemo1::Application.routes.draw do
       get :show_product_by_category
       get :remove_product_image
       get :update_qty
+      get :change_availability
+      get :show_unavailable_products
+      get :show_available_products
     end
   end    
          
@@ -30,12 +32,12 @@ Mydemo1::Application.routes.draw do
   resources :users do
     collection do
       get :welcome
+      #get 'admin', to: 'users#welcome', as: :welcome
       get :home
       get :search_form
       get :show_search_users
       get :admin_email_form
       get :admin_send_email
-      get :signup_with_facebook
     end 
   end  
   

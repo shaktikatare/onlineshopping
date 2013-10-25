@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
       if params[:query].to_f != 0.0
         @orders = Order.where("id % 100 = ? ", "#{params[:query]}")
       else
-        @orders = Order.where("full_name like ? ", "%#{params[:query]}%")
+        @orders = Order.where("full_name like ? or stripe_customer_token like ?", "%#{params[:query]}%", "%#{params[:query]}%")
       end
       @orders = paginate_items(@orders)
       #flash[:partial] = "no record found" if @orders.length == 0
