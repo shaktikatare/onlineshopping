@@ -9,6 +9,13 @@ padding:20px;
 a{
   margin-right:20px;
 } 
+.product-alignment
+{
+  width:950px; 
+  float:right;
+  margin:0 auto;
+  padding:-10px;
+}
 
 .slider-ul{
 padding:0;

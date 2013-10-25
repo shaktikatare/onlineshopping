@@ -1,6 +1,6 @@
 <%= render partial:"users/sidebar"%>
 <div class="product-alignment">
-<%=link_to "show cart",display_cart_products_path, class:"btn btn-primary"%>
+  <%=link_to "show cart",display_cart_products_path, class:"btn btn-primary"%>
   <ul class="products">
     <% @products.each do |p|%>
       <li class="thumbnail">
