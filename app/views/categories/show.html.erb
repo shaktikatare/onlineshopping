@@ -4,8 +4,12 @@
   <ul class="products">
     <% @products.each do |p|%>
       <li class="thumbnail">
-        <a href=<%=product_path(:id=>p.id) %> > 
-          <%= image_tag(p.pictures.first.image,:size => "166x194")%>
+        <a href=<%=product_path(:id=>p.id) %> >
+          <%if p.pictures.length > 0%> 
+            <%= image_tag(p.pictures.first.image,:size => "166x194")%>
+          <% else %>
+            <%= image_tag("/assets/default_image.jpg",:size => "166x194")%>
+          <% end %>
           <h5><%=p.name%></h5>
           <p>Price:<%=p.price%></p>
         </a>
