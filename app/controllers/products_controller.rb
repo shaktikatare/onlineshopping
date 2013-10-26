@@ -45,19 +45,19 @@ class ProductsController < ApplicationController
     if @product.availability
       @product.update_attributes(:availability => false) 
       @cart.destroy_all
-      redirect_to products_path(:availability => true),notice: "Change Availability successfully"
+      redirect_to products_path(:available => true),notice: "Change Availability successfully"
     else  
       @product.update_attributes(:availability => true)
       @cart.destroy_all
-      redirect_to products_path(:availability => false),notice: "Change Availability successfully"
+      redirect_to products_path(:available => false),notice: "Change Availability successfully"
     end  
   end
   
     
   def remove_product_image
     @picture = Picture.find(params[:id])
-    @picture.destroy ? (redirect_to products_path(:availability => true), notice:"image removed successfully") 
-                     : (redirect_to products_path(:availability => true), partial:"image not removed successfully")                  
+    @picture.destroy ? (redirect_to products_path(:available => true), notice:"image removed successfully") 
+                     : (redirect_to products_path(:available => true), partial:"image not removed successfully")                  
   end
   
   def edit
