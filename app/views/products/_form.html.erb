@@ -9,17 +9,20 @@
         <div class="control-group">
           <lable>Select category</lable>
           <div class="controls">
+          <div id="category_error"></div>
           <%= f.select :category_ids, Category.all.collect {|c| [c.name, c.id]}, {}, :multiple => true %>
         </div>
       </div>
         
         <div class="control-group">
           <div class="controls">
+            <div id="name_error"></div>
             <%= f.text_field :name, :class => 'text_field', :placeholder => "Name" %>
           </div>
         </div>
         <div class="control-group">
           <div class="controls">
+            <div id="price_error"></div>
             <%= f.text_field :price, :class => 'number_field', :placeholder => "Price" %>
           </div>
         </div>
@@ -39,7 +42,7 @@
         </div>
 
         <div class="form-actions">
-          <%= f.submit nil, :class => 'btn btn-primary' %>
+          <%= f.submit nil, :class => 'btn btn-primary',onclick:"return validate_form()" %>
           <%if @product.id%>
             <%= link_to t('.cancel', :default => t("helpers.links.cancel")),products_path, :class => 'btn' %>
           <%else%>  
@@ -50,3 +53,26 @@
     </body>
   </div>  
 </div> 
+<script>
+  function validate_form()
+  { var valid = true;
+    if($("#product_category_id").val() == "")
+    {
+      $("#category_error").text("Please select category ").fadeIn(1000);
+      valid = false;
+    }
+          
+    if($("#product_name").val() == "")
+    {
+      $("#name_error").text("Please Enter Name Of Product ").fadeIn(1000);
+      valid = false;
+    }
+    
+    if($("#product_price").val() == "")
+    {
+      $("#price_error").text("Please Enter Price Of Product ").fadeIn(1000);
+      valid = false;
+    }
+    return valid;
+  }
+</script>
