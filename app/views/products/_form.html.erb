@@ -35,9 +35,7 @@
         <div>
           <%= f.fields_for :pictures do |pic| %>
             <%= pic.file_field :image %>
-            <%= pic.link_to_remove "Remove this image" %>
           <% end %>
-          <p><%= f.link_to_add "Add a image", :pictures %></p>
           </br>
         </div>
 

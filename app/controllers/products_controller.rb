@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
   
   def new
     @product = Product.new 
+    @pictures = 3.times {@product.pictures.build}
   end
   
   def create
