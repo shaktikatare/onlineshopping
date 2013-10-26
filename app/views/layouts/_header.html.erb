@@ -25,5 +25,10 @@
     <% unless current_user.present? %>
       <%= render partial:"layouts/search_product"%>
     <% end %>
+    <% if current_user.present? and !current_user.is_admin %>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%=link_to "show cart",display_cart_products_path, class:"float-right"%></li>
+      </ul>
+    <%end%>
   </div>
 </nav>

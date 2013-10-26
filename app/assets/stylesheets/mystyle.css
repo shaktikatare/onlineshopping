@@ -45,6 +45,10 @@ ul.products li {
   float:left;
 }
 
+.float-right{
+  float:right;
+}
+
 textarea{
   height: 70px;
 }

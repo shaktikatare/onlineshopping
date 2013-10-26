@@ -4,7 +4,7 @@
   <div class="alignment">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h5 class="panel-title">UnAvailable Products<h5>
+        <h5 class="panel-title"><%if @available%>Available Products<% else %>UnAvailable Products<%end%><h5>
       </div>
       <div class="panel-body">
       <table class="table table-striped table-bordered table-condensed">
